@@ -43,7 +43,6 @@ My goal with this capstone will be to utulize a complex set of models to create 
 - [] Global Chat implementation using websockets
 - [] Filtering methods for fiding people with specific characteristics
 - [] Blocking or unmatching capabilities that will delete conversations between users
-- [] Another database for user recipes that is mapped onto one page, and on another a form to fill out a put request to make new recipes
 - [] Conditional styling based on characteristics of users
 - [] More ideas to come soon!
 
