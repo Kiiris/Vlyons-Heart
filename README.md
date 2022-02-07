@@ -41,6 +41,6 @@ My goal with this capstone will be to utulize a complex set of models to create 
 
 ### **_Screenshots_**
 
-![Image](https://imgur.com/tgiNY39)
+![Image](https://i.imgur.com/tgiNY39.png)
 
 ---
