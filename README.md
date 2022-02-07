@@ -2,7 +2,7 @@
 
 *Work In Progress*
 
-[Trello!](https://trello.com/invite/b/iVd385du/36c657cd0a2d9f3e7cfa63008ca5bc56/first-fullstack-application)
+[Trello!](https://trello.com/b/pfUnOjzb/dating-app)
 
 # Dating/Chat Application 
 ## ***Description***
