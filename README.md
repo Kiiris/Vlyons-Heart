@@ -53,7 +53,7 @@ My goal with this capstone will be to utulize a complex set of models to create 
 
 
 # ERD - (in progress)
-![Image](https://i.imgur.com/tgiNY39.png)
+![Image](https://i.imgur.com/tLAvUl7.png)
 ---
 # CHD - (in progress)
 ![Image](https://i.imgur.com/GJMOEn2.png)
