@@ -37,3 +37,10 @@ My goal with this capstone will be to utulize a complex set of models to create 
 - [] Conditional styling based on characteristics of users
 - [] More ideas to come soon!
 
+---
+
+### **_Screenshots_**
+
+![Image](https://imgur.com/tgiNY39)
+
+---
