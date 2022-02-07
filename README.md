@@ -41,8 +41,11 @@ My goal with this capstone will be to utulize a complex set of models to create 
 
 ### **_Screenshots_**
 
+
+# ERD - (in progress)
 ![Image](https://i.imgur.com/tgiNY39.png)
 ---
+# CHD - (in progress)
 ![Image](https://i.imgur.com/GJMOEn2.png)
 
 ---
