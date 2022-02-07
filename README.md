@@ -7,6 +7,16 @@
 # Dating/Chat Application 
 ## ***Description***
 It's Febuary! If you're bored and in a pandemic, have a good time by chating with others, and finding the one for you. This application will let users connect and interact with each other, find new friends and more with a customizable way to filter by characteristics!
+***
+### ***Technologies ***
+- [] React 
+- [] Django
+- [] Postgres
+- [] Rest Framework
+- [] Django User auth
+- [] (React use context potentially)
+- [] React UI libraries (Mantine, Mui, etc)
+***
 
 ***
 ### ***Goals and Potential Ideas ***
