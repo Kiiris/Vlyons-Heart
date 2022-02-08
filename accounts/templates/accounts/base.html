@@ -1,0 +1,14 @@
+<!-- tunr/templates/tunr/base.html -->
+<!-- ... -->
+<nav>
+  <a href="{% url 'user_list' %}">Users</a>
+   <div class="user-info">
+     {% if user.is_authenticated %} Welcome, {{ user.username }}
+     <a href="{% url 'logout' %}">Log out</a>
+     {% else %}
+     <a href="{% url 'login' %}">Login</a>
+     {% endif %}
+     <a href="{% url 'signup' %}">Signup</a>
+   </div>
+</nav>
+<!-- ... -->
