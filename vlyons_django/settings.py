@@ -28,8 +28,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 LOGIN_REDIRECT_URL = '/'
+
+DJOSER = {
+    'LOGIN_FIELD': 'email',
+}
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -95,26 +100,24 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+]
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.TokenAuthentication'
     ]
   
 }
-DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
-    'SERIALIZERS': {},
-}
+
 
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),

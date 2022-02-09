@@ -2,6 +2,12 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from accounts.models import User
+
+
+
+class CustomUser(models.Model):
+  user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
 class Conversation(models.Model):
@@ -19,6 +25,6 @@ class Message(models.Model):
   recipient = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
   def __str__(self):
-    return(self.recipient)
+    return(self.content)
 
 

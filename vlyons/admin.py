@@ -16,34 +16,36 @@ from django.contrib import admin
 from django import forms
 from django.forms import TextInput, Textarea, CharField
 from django.contrib.auth.admin import UserAdmin
+from accounts.models import User
+from .models import Conversation, Message
 
 # from django.contrib import admin
 # from django.contrib.auth.admin import UserAdmin
 
 # from forms import CustomUserCreationForm, CustomUserChangeForm
-from accounts.models import User
+# from accounts.models import User
 
 
-class CustomUserAdmin(UserAdmin):
-    # add_form = CustomUserCreationForm
-    # form = CustomUserChangeForm
-    # model = CustomUser
-    model = User
-    search_fields = ('email', 'username', 'password')
-    list_display = ('email', 'username', 'password', 'is_staff', 'is_active',)
-    list_filter = ('email', 'username', 'password', 'is_staff', 'is_active',)
-    fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Permissions', {'fields': ('is_staff', 'is_active')}),
-    )
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active')}
-        ),
-    )
-    search_fields = ('email',)
-    ordering = ('email',)
+# class CustomUserAdmin(UserAdmin):
+#     # add_form = CustomUserCreationForm
+#     # form = CustomUserChangeForm
+#     # model = CustomUser
+#     model = User
+#     search_fields = ('email', 'username', 'password')
+#     list_display = ('email', 'username', 'password', 'is_staff', 'is_active',)
+#     list_filter = ('email', 'username', 'password', 'is_staff', 'is_active',)
+#     fieldsets = (
+#         (None, {'fields': ('email', 'password')}),
+#         ('Permissions', {'fields': ('is_staff', 'is_active')}),
+#     )
+#     add_fieldsets = (
+#         (None, {
+#             'classes': ('wide',),
+#             'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active')}
+#         ),
+#     )
+#     search_fields = ('email',)
+#     ordering = ('email',)
 
 
 # admin.site.register(CustomUser, CustomUserAdmin)
@@ -68,5 +70,6 @@ class CustomUserAdmin(UserAdmin):
 #     ordering = ('email',)
 #     filter_horizontal = ()
 
-# admin.site.register(User, UserAdmin)
-# admin.site.register(User)
+admin.site.register(User)
+admin.site.register(Message)
+admin.site.register(Conversation)

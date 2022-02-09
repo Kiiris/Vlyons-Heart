@@ -6,31 +6,35 @@ from accounts.models import User
 class UserSerializer(serializers.ModelSerializer):
   class Meta:
     model = User
-    fields = ('id', 'email', 'name', 'gender', 'preference', 'birth_year', 'location', 'self_summary', 'description', 'photo_url', 'hidden', 'liked_by','likes', 'nerdy', 'musical', 'hard_working', 'romantic', 'album',)
+    fields = ('id', 'email', 'username', 'gender', 'preference', 'birth_year', 'location', 'self_summary', 'description', 'photo_url', 'hidden', 'liked_by','likes', 'nerdy', 'musical', 'hard_working', 'romantic', 'album', 'password',)
 
-class MessageSerializer(serializers.HyperlinkedModelSerializer):
-  user_url = serializers.ModelSerializer.serializer_url_field(
-    view_name="user_detail",
-  )
-  user_id = serializers.PrimaryKeyRelatedField(
-    queryset=User.objects.all(),
-    source='user'
-  )
-  conversation_url = serializers.ModelSerializer.serializer_url_field(
-    view_name="conversation_detail",
-    source="conversation"
-  )
-  conversation_id = serializers.PrimaryKeyRelatedField(
-    queryset=Conversation.objects.all(),
-    source="conversation"
+class MessageSerializer(serializers.ModelSerializer):
+  # user_url = serializers.ModelSerializer.serializer_url_field(
+  #   view_name="user_detail"
+  # )
+  # user_id = serializers.PrimaryKeyRelatedField(
+  #   many=True,
+  #   read_only=True
+  # )
+  # conversation_url = serializers.ModelSerializer.serializer_url_field(
+  #   view_name="conversation_detail",
+  #   source="conversation"
+  # )
+  # conversation_id = serializers.PrimaryKeyRelatedField(
+  #   many=True,
+  #   read_only=True
+  # )
+  recipient = UserSerializer(
+     many=True,
+     read_only=True
   )
   class Meta:
     model = Message
-    fields = ('id', 'user_id', 'user_url', 'conversation_id', 'conversation_url' 'content', 'reaction', 'date', 'recipient', 'conversation',) 
+    fields = ('id','content', 'reaction', 'date', 'recipient',) 
 
 class ConversationSerializer(serializers.HyperlinkedModelSerializer):
   message_url = serializers.ModelSerializer.serializer_url_field(
-    view_name="message_detail",
+    view_name="message_detail"
   )
   message_id = serializers.PrimaryKeyRelatedField(
     queryset=Message.objects.all(),
