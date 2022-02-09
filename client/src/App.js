@@ -74,7 +74,11 @@ function App() {
   //   }
   // });
 
-  // console.log(Object.keys(results).filter((key) => key.includes(results[key])));
+  // const filtered = Object.filter(
+  //   results,
+  //   ([username, preference]) => username === 'Jana'
+  // );
+  // console.log(filtered);
 
   return (
     <div className="App">
