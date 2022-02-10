@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import NavBar from './pages/NavBar';
+import Profiles from './pages/Profiles';
+import Accounts from './pages/Accounts';
+import Questions from './pages/Questions';
+import ProfileDetails from './pages/ProfileDetails';
+import Messages from './pages/Messages';
 import axios from 'axios';
 import './App.css';
 
 function App() {
-  const [results, setResults] = useState({});
-  const [men, setMen] = useState({});
-  const [women, setWomen] = useState({});
-  const [members, setMembers] = useState({});
-  const [preferences, setPreferences] = useState('Both');
-  const [logged, setLogged] = useState(false);
-  const [Login, setLogin] = useState({
-    email: '',
-    username: '',
-    password: ''
-  });
-  const [currentUser, setCurrentUser] = useState({});
+  const [men, setMen] = useState([]);
+  const [women, setWomen] = useState([]);
+  const [members, setMembers] = useState([]);
+  const [started, setStarted] = useState(false);
+  // const [preferences, setPreferences] = useState('Both');
 
   const getResults = async () => {
     const res = await axios.get(`http://localhost:8000/user`);
-    setResults(res.data);
+    const results = res.data;
     const people = results.filter(
       (element) => element.gender === 'W' || element.gender === 'M'
     );
@@ -28,129 +27,252 @@ function App() {
     setMembers(people);
     setWomen(girls);
     setMen(boys);
-    console.log(girls);
-    console.log(boys);
-    console.log(people);
   };
-
-  useEffect(() => {
-    getResults();
-  }, []);
-
-  const handleChange = (e) => {
-    setPreferences(e.target.value);
-  };
+  const [logged, setLogged] = useState(false);
+  const [Login, setLogin] = useState({
+    email: '',
+    username: '',
+    password: ''
+  });
+  const [currentUser, setCurrentUser] = useState('');
 
   const inputHandler = (e) => {
     setLogin({ ...Login, [e.target.className]: e.target.value });
   };
 
   const loginButton = (e) => {
-    e.prevent.Default();
-    Object.keys(members).forEach((key) => {
-      if (
-        members[key].username === Login.username &&
-        members[key].email === Login.email &&
-        members[key].password === Login.password
-      ) {
-        const user = members.filter(
-          (element) =>
-            element.username == Login.username &&
-            element.email == Login.email &&
-            element.password == Login.password
-        );
-        setCurrentUser(user);
-        setLogged(true);
-        console.log('is something working');
-      }
-      console.log('bananas');
-    });
+    e.preventDefault();
+    const user = members.find(
+      (element) =>
+        element.username === Login.username &&
+        element.password === Login.password &&
+        element.email === Login.email
+    );
+    // user === undefined ? console.log('not a good user') :
+    console.log(user);
+    setCurrentUser(user);
+    // localStorage.setItem('loggedInUser', currentUser);
+    // localStorage.getItem("loggedInUser")
+    setLogged(true);
   };
 
-  // Object.keys(results).forEach((key) => {
-  //   console.log(results[key].username);
-  //   if (results[key].username === 'Jana') {
-  //     console.log('hello');
-  //   }
-  // });
+  const createAccount = async (e) => {
+    e.preventDefault();
+    const newAccount = {
+      email: e.target.email.value,
+      username: e.target.username.value,
+      password: e.target.password.value,
+      gender: e.target.gender.value,
+      preference: e.target.preference.value,
+      birth_year: e.target.birth_year.value,
+      location: e.target.location.value,
+      self_summary: e.target.self_summary.value,
+      description: e.target.description.value,
+      photo_url: e.target.photo_url.value,
+      album: [e.target.photo_url.value]
+    };
+    await axios.post(`http://localhost:8000/user/`, newAccount);
+    // window.location.reload();
+  };
 
-  // const filtered = Object.filter(
-  //   results,
-  //   ([username, preference]) => username === 'Jana'
-  // );
-  // console.log(filtered);
+  useEffect(() => {
+    getResults();
+  }, []);
+
+  const startUp = (e) => {
+    setStarted(true);
+  };
 
   return (
     <div className="App">
       <header className="App-header">
-        {/* {logged ? <h1>Welcome to the party {currentUser.username}</h1> : null} */}
-        <form className={!logged ? 'valid' : 'loggedin'}>
-          <input
-            type="text"
-            onChange={inputHandler}
-            value={Login.email}
-            className="email"
-            placeholder="Email"
-          />
-          <input
-            type="text"
-            onChange={inputHandler}
-            value={Login.username}
-            className="username"
-            placeholder="Username"
-          />
-          <input
-            type="password"
-            onChange={inputHandler}
-            value={Login.password}
-            className="password"
-            placeholder="Password"
-          />
+        <NavBar />
+        {!started ? <button onClick={startUp}>Let's start!</button> : null}
+        {started ? (
+          <div>
+            <form className={!logged ? 'valid' : 'loggedin'}>
+              <input
+                type="text"
+                onChange={inputHandler}
+                value={Login.email}
+                className="email"
+                placeholder="Email"
+              />
+              <input
+                type="text"
+                onChange={inputHandler}
+                value={Login.username}
+                className="username"
+                placeholder="Username"
+              />
+              <input
+                type="password"
+                onChange={inputHandler}
+                value={Login.password}
+                className="password"
+                placeholder="Password"
+              />
 
-          <button className="loginbutton" onClick={loginButton} type="submit">
-            Login
-          </button>
-        </form>
-        <h1>I like {preferences} </h1>
-        <form>
-          <select name="choice" onChange={handleChange}>
-            <option value="Men">Find Men</option>
-            <option value="Women">Find Women</option>
-            <option value="Both">Both</option>
-          </select>
-        </form>
-        <h4>What you want is what you get</h4>
-        {preferences === 'Both'
-          ? members.map((element) => {
-              return (
-                <div key={element.id}>
-                  <h2>{element.username}</h2>
-                  <h4>{element.gender}</h4>
-                  <img src={element.photo_url} />
+              <button
+                className="loginbutton"
+                onClick={loginButton}
+                type="submit"
+              >
+                Login
+              </button>
+            </form>
+            <form onSubmit={createAccount}>
+              <div className="form">
+                <div className="formField">
+                  <h2>Let's Go!</h2>
+                  <input
+                    name="email"
+                    type="text"
+                    placeholder="email"
+                    className="formTextArea"
+                  />
                 </div>
-              );
-            })
-          : preferences === 'Men'
-          ? men.map((element) => {
-              return (
-                <div key={element.id}>
-                  <h2>{element.username}</h2>
-                  <h4>{element.gender}</h4>
-                  <img src={element.photo_url} />
+
+                <div className="formField">
+                  <input
+                    name="username"
+                    type="text"
+                    placeholder="username"
+                    className="formTextArea"
+                  />
                 </div>
-              );
-            })
-          : preferences === 'Women'
-          ? women.map((element) => {
-              return (
-                <div key={element.id}>
-                  <h2>{element.username}</h2>
-                  <h4>{element.gender}</h4>
-                  <img src={element.photo_url} />
+
+                <div className="formField">
+                  <textarea
+                    name="password"
+                    type="text"
+                    placeholder="password"
+                    className="formTextAreawitness"
+                  />
                 </div>
-              );
-            })
-          : null}
+                <div className="formField">
+                  <select name="gender">
+                    <option value="M">I am Man</option>
+                    <option value="W">I am Woman</option>
+                    <option value="N">Nonbinary</option>
+                  </select>
+                </div>
+                <select name="preference">
+                  <option value="M">Prefer Men</option>
+                  <option value="W">Prefer Women</option>
+                  <option value="N">Both</option>
+                </select>
+
+                <textarea
+                  name="self_summary"
+                  type="text"
+                  className="self"
+                  placeholder="self_summary"
+                />
+                <textarea
+                  name="description"
+                  type="text"
+                  className="description"
+                  placeholder="description"
+                />
+                <textarea
+                  name="photo_url"
+                  type="text"
+                  className="photo"
+                  placeholder="photo"
+                />
+                <input
+                  name="location"
+                  type="text"
+                  className="location"
+                  placeholder="location"
+                />
+                <input
+                  name="birth_year"
+                  type="number"
+                  className="birth_year"
+                  placeholder="birth_year"
+                />
+              </div>
+
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        ) : null}
+        <main>
+          <Switch>
+            <Route
+              exact
+              path="/profiles"
+              component={(props) => (
+                <Profiles
+                  {...props}
+                  members={members}
+                  men={men}
+                  women={women}
+                  currentUser={currentUser}
+                  logged={logged}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/accounts"
+              component={(props) => (
+                <Accounts
+                  {...props}
+                  members={members}
+                  men={men}
+                  women={women}
+                  currentUser={currentUser}
+                  logged={logged}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/questions"
+              component={(props) => (
+                <Questions
+                  {...props}
+                  members={members}
+                  men={men}
+                  women={women}
+                  currentUser={currentUser}
+                  logged={logged}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/user/:id"
+              component={(props) => (
+                <ProfileDetails
+                  {...props}
+                  members={members}
+                  men={men}
+                  women={women}
+                  currentUser={currentUser}
+                  logged={logged}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/messages"
+              component={(props) => (
+                <Messages
+                  {...props}
+                  members={members}
+                  men={men}
+                  women={women}
+                  currentUser={currentUser}
+                  logged={logged}
+                />
+              )}
+            />
+          </Switch>
+        </main>
       </header>
     </div>
   );

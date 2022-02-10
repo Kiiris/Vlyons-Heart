@@ -1,7 +1,6 @@
 from django.urls import path
 from django.urls import include
 from . import views
-from .views import index
 from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
@@ -10,9 +9,6 @@ urlpatterns = [
     path('message/', views.MessageList.as_view(), name='message_list'),
     path('message/<int:pk>', views.MessageDetail.as_view(), name='message_detail'),
     path('conversation/', views.ConversationList.as_view(), name='conversation_list'),
-    path('conversation/<int:pk>',views.ConversationDetail.as_view(), name='conversation_detail'),
-    path('', include('djoser.urls')),
-    path('', include('djoser.urls.authtoken')),
-    path('checkserver/', index, name='index')
+    path('conversation/<int:pk>',views.ConversationDetail.as_view(), name='conversation_detail')
 
 ]

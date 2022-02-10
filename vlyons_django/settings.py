@@ -30,13 +30,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-LOGIN_REDIRECT_URL = '/'
 
-DJOSER = {
-    'LOGIN_FIELD': 'email',
-}
-
-AUTH_USER_MODEL = 'accounts.User'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -54,18 +48,24 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 ]
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
+"http://localhost:3000"
+
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    
 ]
+
 
 ROOT_URLCONF = 'vlyons_django.urls'
 
@@ -100,28 +100,17 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-]
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
-    ],
+
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
     ]
   
 }
 
-
-SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
