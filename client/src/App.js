@@ -8,6 +8,7 @@ import ProfileDetails from './pages/ProfileDetails';
 import Messages from './pages/Messages';
 import axios from 'axios';
 import './App.css';
+import YourAccount from './pages/YourAccount';
 
 function App() {
   const [men, setMen] = useState([]);

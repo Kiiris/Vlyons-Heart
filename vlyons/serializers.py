@@ -4,14 +4,18 @@ from .models import Message, Conversation,User
 
 
 class UserSerializer(serializers.ModelSerializer):
+  conversations = serializers.HyperlinkedRelatedField(
+    view_name='conversation_detail',
+    many=True,
+    read_only=True
+  )
   class Meta:
     model = User
-    fields = ('id', 'email', 'username', 'gender', 'preference', 'birth_year', 'location', 'self_summary', 'description', 'photo_url', 'hidden', 'liked_by','likes', 'nerdy', 'musical', 'hard_working', 'romantic', 'album', 'password',)
+    fields = ('id', 'email', 'conversations', 'username', 'gender', 'preference', 'birth_year', 'location', 'self_summary', 'description', 'photo_url', 'hidden', 'liked_by','likes', 'nerdy', 'musical', 'hard_working', 'romantic', 'album', 'password',)
 
 class MessageSerializer(serializers.ModelSerializer):
-  recipient = UserSerializer(
-     many=True,
-     read_only=True
+  user_id = serializers.ModelSerializer.serializer_url_field(
+    view_name='user_detail'
   )
   message_url = serializers.ModelSerializer.serializer_url_field(
     view_name='message_detail'
@@ -24,19 +28,20 @@ class MessageSerializer(serializers.ModelSerializer):
     source='conversation')
   class Meta:
     model = Message
-    fields = ('id','content', 'conversation_url', 'message_url', 'conversation_id', 'reaction', 'date', 'recipient',) 
+    fields = ('id','content', 'conversation_url', 'message_url', 'user_id', 'conversation_id', 'reaction', 'date', 'sender',) 
 
 class ConversationSerializer(serializers.HyperlinkedModelSerializer):
-  participant = UserSerializer(
-    many = True, 
-    read_only = True
-  )
-  conversation_url = serializers.ModelSerializer.serializer_url_field(
-    view_name='conversation_detail'
-  )
+  user=serializers.PrimaryKeyRelatedField(
+   queryset=User.objects.all(), 
+   many=True)
+
+  messages = serializers.PrimaryKeyRelatedField(
+    #queryset=User.objects.all()
+    read_only=True,
+    many=True)
   class Meta:
     model = Conversation
-    fields = ('id',  'title', 'participant', 'conversation_url')
+    fields = ('id',  'title', 'photo_one', 'photo_two', 'messages','user',)
 
 
 

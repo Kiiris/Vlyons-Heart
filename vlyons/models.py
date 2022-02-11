@@ -1,5 +1,9 @@
+
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+
+
+
 
 
 
@@ -26,16 +30,17 @@ class User(models.Model):
   musical = models.PositiveSmallIntegerField(default=0, blank=True)
   hard_working = models.PositiveSmallIntegerField(default=0, blank=True)
   romantic = models.PositiveSmallIntegerField(default=0, blank=True)
-  album = ArrayField(models.URLField(max_length=200), default=list, blank=True) 
-
+  album = ArrayField(models.URLField(max_length=200), default=list, blank=True)
+  
   def __str__(self):
     return (self.username)
-
-
+    
 class Conversation(models.Model):
   title = models.CharField(max_length=50, default="New Match!", blank=True)
-  participant = models.ManyToManyField(User, related_name='user')
-  
+  photo_one = models.URLField()
+  photo_two = models.URLField()
+  user = models.ManyToManyField(User, related_name='conversations')
+
 
   
   def __str__(self):
@@ -46,10 +51,11 @@ class Message(models.Model):
   content = models.TextField()
   reaction = models.CharField(max_length=20, blank=True)
   date = models.DateTimeField(auto_now_add=True)
-  recipient = models.ManyToManyField(User)
+  sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="senders")
   conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE,related_name='messages', default='')
 
   def __str__(self):
     return(self.content)
+
 
 
