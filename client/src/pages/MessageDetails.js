@@ -68,8 +68,8 @@ const MessageDetails = (props) => {
                   {element.sender === props.currentUser.id ? (
                     <h3>{props.currentUser.username}: </h3>
                   ) : (
-                    <h3>They sent:</h3>
-                  )}{' '}
+                    <h3>{participants.username}</h3>
+                  )}
                   {element.content}
                 </h3>
               </div>
@@ -78,6 +78,7 @@ const MessageDetails = (props) => {
         : null}
       <form onSubmit={postMessage}>
         <textarea value={newMessage.content} onChange={handleChange} />
+        <br />
         <button>Make a message </button>
       </form>
     </div>

@@ -12,9 +12,11 @@ const ProfileDetails = (props) => {
       `http://localhost:8000/user/${props.match.params.id}`
     );
     setDetails(res.data);
+    if (res.data.id === props.currentUser.id) {
+      setProfile(true);
+    }
     // console.log(res.data);
   };
-  const newparticipant = [];
 
   const handleChange = (e) => {
     setContent(e.target.value);
@@ -25,8 +27,6 @@ const ProfileDetails = (props) => {
     const likesbody = [...details.liked_by, props.currentUser.username];
     if (likesbody.includes(props.currentUser.username)) {
       setMatched(true);
-      newparticipant.push(props.currentUser);
-      newparticipant.push(details);
 
       const newConversaion = {
         title: `${props.currentUser.username} & ${details.username}`,
@@ -52,27 +52,6 @@ const ProfileDetails = (props) => {
       });
     }
   };
-
-  const createConversation = async (e) => {
-    e.preventDefault();
-    newparticipant.push(props.currentUser);
-    newparticipant.push(details);
-
-    const newConversaion = {
-      title: `${props.currentUser.username} & ${details.username} forever`,
-      photo_one: details.photo_url,
-      photo_two: props.currentUser.photo_url,
-      messages: [],
-      user: [
-        props.currentUser.id,
-        details.id
-        // `http://localhost:8000/user/${props.match.params.id}`,
-        // `http://localhost:8000/user/${props.currentUser.id}`
-      ]
-    };
-    await axios.post(`http://localhost:8000/conversation/`, newConversaion);
-  };
-
   console.log(props.currentUser);
   console.log(details);
 
@@ -86,18 +65,16 @@ const ProfileDetails = (props) => {
     getDetails();
   }, []);
 
-  if (details.id === props.currentUser.id) {
-    myProfile(true);
-  }
-
   return (
     <div>
-      {!props.logged ? (
+      {myProfile ? (
         <h1>This is your profile, {props.currentUser.username}</h1>
       ) : null}
       {matched ? <h1>You matched! </h1> : null}
       <img src={details.photo_url} />
-      {/* <button onClick={deleteProfile}> Delete Profile</button> */}
+      {myProfile ? (
+        <button onClick={deleteProfile}> Delete Profile</button>
+      ) : null}
       {/* <input
           id="email"
           type="text"
@@ -161,7 +138,7 @@ const ProfileDetails = (props) => {
         Like
       </button>
       <br />
-      <button onClick={createConversation}>createConversation</button>
+      {/* <button onClick={createConversation}>createConversation</button> */}
       {/* <textarea
           id="photo_url"
           value={content.photo_url}
