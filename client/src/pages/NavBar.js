@@ -14,6 +14,15 @@ const NavBar = (props) => {
             <Link to="/accounts"> Accounts</Link>
           </li>
           <li>
+            <button
+              onClick={() =>
+                props.history.push(`/user/${props.currentUser.id}`)
+              }
+            >
+              Your Profile
+            </button>
+          </li>
+          <li>
             <Link to="/profiles">profiles</Link>
           </li>
           <Link to="/questions">Questions</Link>

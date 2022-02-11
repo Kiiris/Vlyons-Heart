@@ -56,8 +56,8 @@ function App() {
     setCurrentUser(user);
     localStorage.setItem('loggedInUser', JSON.stringify(user));
     //JSON.parse
-    localStorage.getItem('loggedInUser');
     setLogged(true);
+    localStorage.setItem('loggedInUser', logged);
   };
 
   const createAccount = async (e) => {
@@ -81,6 +81,10 @@ function App() {
 
   useEffect(() => {
     getResults();
+    localStorage.getItem('loggedInUser');
+    if (!logged) {
+      localStorage.removeItem('loggedInUser');
+    }
   }, []);
 
   const startUp = (e) => {

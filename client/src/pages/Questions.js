@@ -20,7 +20,7 @@ const Questions = (props) => {
     'How important are games to you?': 2,
     "Is coding something you're very particular about?": 2
   };
-
+  const another = ['pickles', 'sheep', 'pie'];
   useEffect(() => {
     // setIndex((prevIndex) =>
     //   prevIndex === colors.length - 1 ? 0 : prevIndex + 1
@@ -40,7 +40,7 @@ const Questions = (props) => {
       </div>
 
       <div className="slideshowDots">
-        {colors.map((_, idx) => (
+        {another.map((_, idx) => (
           <div
             key={idx}
             className={`slideshowDot${index === idx ? ' active' : ''}`}

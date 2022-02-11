@@ -10,21 +10,14 @@ const Profiles = (props) => {
   return (
     <div>
       <header>
-        <h1>
-          I like{' '}
-          {props.currentUser.preference === 'M'
-            ? 'Men'
-            : props.currentUser.preference === 'W'
-            ? 'Women'
-            : 'Both'}
-        </h1>
-        <form>
+        <h1> Welcome to the party, {props.currentUser.username}</h1>
+        {/* <form>
           <select name="choice" onChange={handleChange}>
             <option value="Men">Find Men</option>
             <option value="Women">Find Women</option>
             <option value="Both">Both</option>
           </select>
-        </form>
+        </form> */}
         <h4>What you want is what you get</h4>
         {props.currentUser.preference === 'N'
           ? props.members.map((element) => {
@@ -34,7 +27,6 @@ const Profiles = (props) => {
                   onClick={() => props.history.push(`/user/${element.id}`)}
                 >
                   <h2>{element.username}</h2>
-                  <h4>{element.gender}</h4>
                   <img src={element.photo_url} />
                 </div>
               );
@@ -47,7 +39,6 @@ const Profiles = (props) => {
                   onClick={() => props.history.push(`/user/${element.id}`)}
                 >
                   <h2>{element.username}</h2>
-                  <h4>{element.gender}</h4>
                   <img src={element.photo_url} />
                 </div>
               );
@@ -60,7 +51,6 @@ const Profiles = (props) => {
                   onClick={() => props.history.push(`/user/${element.id}`)}
                 >
                   <h2>{element.username}</h2>
-                  <h4>{element.gender}</h4>
                   <img src={element.photo_url} />
                 </div>
               );
