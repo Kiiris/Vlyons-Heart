@@ -6,19 +6,18 @@ const MessageDetails = (props) => {
   const [participants, setParticipants] = useState([]);
   const [newMessage, setMessage] = useState('');
 
-  // const otherUser = yourMessages.filter(
-  //   (element) => element.sender != props.currentUser.id
-  // );
-  // const findings = otherUser.find((element) => element);
-  // console.log(findings.sender);
-
-  // const getParticipants = async () => {
-  //   const res = await axios.get(
-  //     `http://localhost:8000/user/${findings.sender}`
-  //   );
-  //   setParticipants(res.data);
-  //   console.log(res.data);
-  // };
+  const getParticipants = async (messages) => {
+    const otherUser = messages.filter(
+      (element) => element.sender != props.currentUser.id
+    );
+    const findings = otherUser.find((element) => element);
+    console.log(findings.sender);
+    const res = await axios.get(
+      `http://localhost:8000/user/${findings.sender}`
+    );
+    setParticipants(res.data);
+    console.log(res.data);
+  };
 
   const handleChange = (e) => {
     setMessage(e.target.value);
@@ -29,6 +28,7 @@ const MessageDetails = (props) => {
     );
     setMessages(res.data);
     console.log(res.data);
+    getParticipants(res.data);
   };
 
   const found = yourMessages.find((element) => element.conversation);
@@ -47,17 +47,16 @@ const MessageDetails = (props) => {
 
   useEffect(() => {
     getMessages();
-    // getParticipants();
   }, []);
 
   return (
     <div>
       <img
-        // onClick={() => props.history.push(`/user/${props.currentUser.id}`)}
+        onClick={() => props.history.push(`/user/${props.currentUser.id}`)}
         src={props.currentUser.photo_url}
       />
       <img
-        // onClick={() => props.history.push(`/user/${participants.id}`)}
+        onClick={() => props.history.push(`/user/${participants.id}`)}
         src={participants.photo_url}
       />
       <h1>Messages</h1>

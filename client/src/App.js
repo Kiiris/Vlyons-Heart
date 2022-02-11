@@ -54,8 +54,9 @@ function App() {
     // user === undefined ? console.log('not a good user') :
     console.log(user);
     setCurrentUser(user);
-    // localStorage.setItem('loggedInUser', currentUser);
-    // localStorage.getItem("loggedInUser")
+    localStorage.setItem('loggedInUser', JSON.stringify(user));
+    //JSON.parse
+    localStorage.getItem('loggedInUser');
     setLogged(true);
   };
 
@@ -95,6 +96,7 @@ function App() {
           <div>
             <form className={logged ? 'gone' : 'valid'}>
               <input
+                required
                 type="text"
                 onChange={inputHandler}
                 value={Login.email}
@@ -102,6 +104,7 @@ function App() {
                 placeholder="Email"
               />
               <input
+                required
                 type="text"
                 onChange={inputHandler}
                 value={Login.username}
@@ -109,6 +112,7 @@ function App() {
                 placeholder="Username"
               />
               <input
+                required
                 type="password"
                 onChange={inputHandler}
                 value={Login.password}
