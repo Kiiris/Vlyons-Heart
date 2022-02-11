@@ -6,8 +6,10 @@ const NavBar = (props) => {
     <div>
       <ul className="nav">
         <nav>
-          <Link to="/messages">Messages</Link>
-          <Link to="/about">about</Link>
+          <Link to="/messages">Matches</Link>
+          <li>
+            <Link to="/about">about</Link>
+          </li>
           <li>
             <Link to="/accounts"> Accounts</Link>
           </li>

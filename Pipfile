@@ -5,7 +5,8 @@ name = "pypi"
 
 [packages]
 django = "*"
-psycopg2-binary = "*"
+django-filter = "*"
+accounts = {mode-binary = "*"}
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 django-cors-headers = "*"

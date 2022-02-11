@@ -8,6 +8,7 @@ import ProfileDetails from './pages/ProfileDetails';
 import Messages from './pages/Messages';
 import axios from 'axios';
 import './App.css';
+import MessageDetails from './pages/MessageDetails';
 import YourAccount from './pages/YourAccount';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
   const [women, setWomen] = useState([]);
   const [members, setMembers] = useState([]);
   const [started, setStarted] = useState(false);
+  const [myProfile, setProfile] = useState(false);
   // const [preferences, setPreferences] = useState('Both');
 
   const getResults = async () => {
@@ -87,11 +89,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <NavBar />
+        {!started ? null : <NavBar />}
         {!started ? <button onClick={startUp}>Let's start!</button> : null}
         {started ? (
           <div>
-            <form className={!logged ? 'valid' : 'loggedin'}>
+            <form className={logged ? 'gone' : 'valid'}>
               <input
                 type="text"
                 onChange={inputHandler}
@@ -122,7 +124,10 @@ function App() {
                 Login
               </button>
             </form>
-            <form onSubmit={createAccount}>
+            <form
+              className={logged ? 'gone' : 'valid'}
+              onSubmit={createAccount}
+            >
               <div className="form">
                 <div className="formField">
                   <h2>Let's Go!</h2>
@@ -263,6 +268,20 @@ function App() {
               path="/messages"
               component={(props) => (
                 <Messages
+                  {...props}
+                  members={members}
+                  men={men}
+                  women={women}
+                  currentUser={currentUser}
+                  logged={logged}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/messages/:id"
+              component={(props) => (
+                <MessageDetails
                   {...props}
                   members={members}
                   men={men}

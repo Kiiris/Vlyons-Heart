@@ -28,20 +28,22 @@ class MessageSerializer(serializers.ModelSerializer):
     source='conversation')
   class Meta:
     model = Message
-    fields = ('id','content', 'conversation_url', 'message_url', 'user_id', 'conversation_id', 'reaction', 'date', 'sender',) 
+    fields = ('id','content', 'conversation','conversation_url', 'message_url', 'user_id', 'conversation_id', 'reaction', 'date', 'sender',) 
 
 class ConversationSerializer(serializers.HyperlinkedModelSerializer):
   user=serializers.PrimaryKeyRelatedField(
    queryset=User.objects.all(), 
    many=True)
-
+  conversation_url = serializers.ModelSerializer.serializer_url_field(
+    view_name='conversation_detail'
+    )
   messages = serializers.PrimaryKeyRelatedField(
     #queryset=User.objects.all()
     read_only=True,
     many=True)
   class Meta:
     model = Conversation
-    fields = ('id',  'title', 'photo_one', 'photo_two', 'messages','user',)
+    fields = ('id',  'title', 'photo_one', 'conversation_url', 'photo_two', 'messages','user',)
 
 
 

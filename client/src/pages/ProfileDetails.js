@@ -30,7 +30,9 @@ const ProfileDetails = (props) => {
 
       const newConversaion = {
         title: `${props.currentUser.username} & ${details.username}`,
-        newparticipant
+        user: [props.currentUser.id, details.id],
+        photo_one: details.photo_url,
+        photo_two: props.currentUser.photo_url
       };
 
       await axios.post(`http://localhost:8000/conversation/`, newConversaion);
@@ -43,7 +45,7 @@ const ProfileDetails = (props) => {
         preference: details.preference,
         birth_year: details.birth_year,
         location: details.location,
-        description: content,
+        description: details.description,
         photo_url: details.photo_url,
         likes: details.likes,
         liked_by: likesbody
@@ -62,7 +64,8 @@ const ProfileDetails = (props) => {
       photo_two: props.currentUser.photo_url,
       messages: [],
       user: [
-        1, 2
+        props.currentUser.id,
+        details.id
         // `http://localhost:8000/user/${props.match.params.id}`,
         // `http://localhost:8000/user/${props.currentUser.id}`
       ]
@@ -89,9 +92,10 @@ const ProfileDetails = (props) => {
 
   return (
     <div>
-      {myProfile ? (
+      {!props.logged ? (
         <h1>This is your profile, {props.currentUser.username}</h1>
       ) : null}
+      {matched ? <h1>You matched! </h1> : null}
       <img src={details.photo_url} />
       {/* <button onClick={deleteProfile}> Delete Profile</button> */}
       {/* <input
@@ -143,15 +147,19 @@ const ProfileDetails = (props) => {
           placeholder={details.self_summary}
           onChange={handleChange}
         /> */}
-      <form onSubmit={likeProfile}>
-        <textarea
-          id="description"
-          placeholder={details.description}
-          value={content.description}
-          onChange={handleChange}
-        />
-        <button className="editbutton">Like</button>
-      </form>
+      {myProfile ? (
+        <form>
+          <textarea
+            id="description"
+            placeholder={details.description}
+            value={content.description}
+            onChange={handleChange}
+          />
+        </form>
+      ) : null}
+      <button onSubmit={likeProfile} className="editbutton">
+        Like
+      </button>
       <br />
       <button onClick={createConversation}>createConversation</button>
       {/* <textarea

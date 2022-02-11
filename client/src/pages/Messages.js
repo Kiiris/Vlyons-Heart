@@ -5,7 +5,9 @@ const Messages = (props) => {
   const [conversations, setConversations] = useState();
   const [messages, setMessages] = useState();
   const getConversations = async () => {
-    const res = await axios.get(`http://localhost:8000/conversation`);
+    const res = await axios.get(
+      `http://localhost:8000/conversation/?user=${props.currentUser.id}`
+    );
     setConversations(res.data);
     console.log(res.data);
   };
@@ -15,7 +17,6 @@ const Messages = (props) => {
     console.log(res.data);
   };
   useEffect(() => {
-    getMessages();
     getConversations();
   }, []);
   // console.log(conversations[0].photo_one);
@@ -23,26 +24,42 @@ const Messages = (props) => {
   //   (element) => element.title === 'Jana & Jacob'
   // );
   // console.log(rightConversation);
-  props.currentUser.conversations.forEach((element) => console.log(element));
+  // props.currentUser.conversations.forEach((element) => console.log(element));
 
-  const postMessage = async () => {
-    const newMessage = {
-      content: 'I just posted this',
-      reaction: 'Great!',
-      conversation_id: 5,
-      user_id: props.currentUser.id
-    };
-    await axios.post(`http://localhost:8000/message/`, newMessage);
-  };
+  // const matches = Object.entries(conversations);
 
   return (
     <div>
       <div>
-        {/* <h1>{conversations[0].title}</h1>
-        <img src={conversations[0].photo_one} />
-        <img src={conversations[0].photo_two} /> */}
+        {/* {' '}
+        <h1>You have {conversations.length} matches</h1>{' '} */}
       </div>
-      <button onClick={postMessage}>Make a message </button>
+      <div>
+        {props.currentUser.preference === 'M'
+          ? conversations?.map((element) => {
+              return (
+                <div
+                  key={element.id}
+                  onClick={() => props.history.push(`/messages/${element.id}`)}
+                >
+                  <h2>{element.title}</h2>
+                  <img src={element.photo_one} />
+                  <img src={element.photo_two} />
+                  <button
+                    onClick={async () => {
+                      await axios.delete(
+                        `http://localhost:8000/conversation/${element.id}`
+                      );
+                      alert(`${element.title} has been deleted`);
+                    }}
+                  >
+                    Delete {element.title}
+                  </button>
+                </div>
+              );
+            })
+          : null}
+      </div>
     </div>
   );
 };

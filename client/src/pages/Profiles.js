@@ -6,6 +6,7 @@ const Profiles = (props) => {
     setPreferences(e.target.value);
   };
   console.log(props.currentUser);
+  console.log(props.members);
   return (
     <div>
       <header>
