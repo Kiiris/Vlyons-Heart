@@ -5,19 +5,26 @@ const MessageDetails = (props) => {
   const [yourMessages, setMessages] = useState([]);
   const [participants, setParticipants] = useState([]);
   const [newMessage, setMessage] = useState('');
+  const [otherParty, setParty] = useState([]);
 
-  const getParticipants = async (messages) => {
-    const otherUser = messages.filter(
-      (element) => element.sender != props.currentUser.id
-    );
-    const findings = otherUser.find((element) => element);
-    console.log(findings.sender);
+  const getParticipants = async () => {
     const res = await axios.get(
-      `http://localhost:8000/user/${findings.sender}`
+      `http://localhost:8000/conversation/${props.match.params.id}`
     );
     setParticipants(res.data);
-    console.log(res.data);
+    getOtherUser();
+    getMessages();
+    console.log(res.data.user);
   };
+
+  const getOtherUser = async () => {
+    const auser = participants.user;
+    const otherUser = auser.find((element) => element !== props.currentUser.id);
+    const res = await axios.get(`http://localhost:8000/user/${otherUser}`);
+    console.log(res.data);
+    setParty(res.data);
+  };
+  console.log(props.currentUser);
 
   const handleChange = (e) => {
     setMessage(e.target.value);
@@ -28,8 +35,12 @@ const MessageDetails = (props) => {
     );
     setMessages(res.data);
     console.log(res.data);
-    getParticipants(res.data);
   };
+  function getParameter(parameterName) {
+    let parameters = new URLSearchParams(window.location.search);
+    return parameters.get(parameterName);
+  }
+  console.log(getParameter('messages'));
 
   const found = yourMessages.find((element) => element.conversation);
   const postMessage = async (e) => {
@@ -46,7 +57,7 @@ const MessageDetails = (props) => {
   };
 
   useEffect(() => {
-    getMessages();
+    getParticipants();
   }, []);
 
   return (
@@ -57,7 +68,7 @@ const MessageDetails = (props) => {
       />
       <img
         onClick={() => props.history.push(`/user/${participants.id}`)}
-        src={participants.photo_url}
+        src={otherParty.photo_url}
       />
       <h1>Messages</h1>
       {props.logged

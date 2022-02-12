@@ -19,6 +19,7 @@ const Messages = (props) => {
   useEffect(() => {
     getConversations();
   }, []);
+
   // console.log(conversations[0].photo_one);
   // const rightConversation = conversations.filter(
   //   (element) => element.title === 'Jana & Jacob'
@@ -35,7 +36,7 @@ const Messages = (props) => {
         <h1>You have {conversations.length} matches</h1>{' '} */}
       </div>
       <div>
-        {props.currentUser.preference === 'M'
+        {props.logged
           ? conversations?.map((element) => {
               return (
                 <div

@@ -17,6 +17,7 @@ function App() {
   const [members, setMembers] = useState([]);
   const [started, setStarted] = useState(false);
   const [myProfile, setProfile] = useState(false);
+  const [user, seUser] = useState();
   // const [preferences, setPreferences] = useState('Both');
 
   const getResults = async () => {
@@ -54,7 +55,7 @@ function App() {
     // user === undefined ? console.log('not a good user') :
     console.log(user);
     setCurrentUser(user);
-    localStorage.setItem('loggedInUser', JSON.stringify(user));
+    // localStorage.setItem('loggedInUser', JSON.stringify(user));
     //JSON.parse
     setLogged(true);
     localStorage.setItem('loggedInUser', logged);
@@ -81,8 +82,8 @@ function App() {
 
   useEffect(() => {
     getResults();
-    localStorage.getItem('loggedInUser');
-    if (!logged) {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
       localStorage.removeItem('loggedInUser');
     }
   }, []);

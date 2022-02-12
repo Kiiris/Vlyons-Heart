@@ -16,19 +16,23 @@ const ProfileDetails = (props) => {
     if (res.data.id === props.currentUser.id) {
       setProfile(true);
     }
-    const somebody = [...res.data.liked_by];
-    const yourbody = [...res.data.likes];
-    console.log(somebody);
+    const likedby = [...res.data.liked_by];
+    const theirbody = [...res.data.likes];
+    const yourliking = [...props.currentUser.likes];
+    const finalliking = [...props.currentUser.liked_by];
+
     console.log(res.data.likes);
     if (
-      (somebody.includes(props.currentUser.username) === true) &
-      (yourbody.includes(props.currentUser.username) === true)
+      (yourliking.includes(details.username) === true) &
+      (finalliking.includes(details.username) === true) &
+      ((theirbody.includes(props.currentUser.username) === true) &
+        (likedby.includes(props.currentUser.username) === true))
     ) {
       setMatched(true);
     }
   };
   const likeHuman = async () => {
-    const likesbody = [...details.liked_by, props.currentUser.username];
+    const ablebody = [...details.liked_by, props.currentUser.username];
     await axios.put(`http://localhost:8000/user/${props.match.params.id}`, {
       email: details.email,
       username: details.username,
@@ -40,9 +44,35 @@ const ProfileDetails = (props) => {
       description: details.description,
       photo_url: details.photo_url,
       likes: details.likes,
-      liked_by: likesbody
+      liked_by: ablebody
     });
+    alert(
+      `you added ${props.currentUser.username} to ${details.username}'s list of liked_by's`
+    );
   };
+
+  const updateLike = async () => {
+    const addLike = [...props.currentUser.likes, details.username];
+    await axios.put(`http://localhost:8000/user/${props.currentUser.id}`, {
+      email: props.currentUser.email,
+      username: props.currentUser.username,
+      password: props.currentUser.password,
+      gender: props.currentUser.gender,
+      preference: props.currentUser.preference,
+      birth_year: props.currentUser.birth_year,
+      location: props.currentUser.location,
+      description: props.currentUser.description,
+      photo_url: props.currentUser.photo_url,
+      likes: addLike,
+      liked_by: details.liked_by
+    });
+    alert(
+      `you added ${details.username} to ${props.currentUser.username}'s list of likes`
+    );
+  };
+
+  console.log(...props.currentUser.likes, details.username);
+  console.log(props.currentUser);
   const handleChange = (e) => {
     setContent(e.target.value);
   };
@@ -57,11 +87,19 @@ const ProfileDetails = (props) => {
   };
   const likeProfile = (e) => {
     e.preventDefault();
-
-    if (matched) {
-      createConversation();
-    } else {
+    const likedby = [...details.liked_by];
+    const yourliking = [...props.currentUser.likes];
+    if (
+      (yourliking.includes(details.username) === true) &
+      (likedby.includes(props.currentUser.username) === true)
+    ) {
+      console.log("you've already liked them!");
+    } else if (
+      (likedby.includes(props.currentUser.username) !== true) &
+      (yourliking.includes(details.username) !== true)
+    ) {
       likeHuman();
+      updateLike();
     }
   };
 
