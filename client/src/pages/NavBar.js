@@ -4,31 +4,27 @@ import { Link } from 'react-router-dom';
 const NavBar = (props) => {
   return (
     <div>
-      <ul className="nav">
-        <nav>
+      <nav className="nav">
+        <li>
           <Link to="/messages">Matches</Link>
-          <li>
-            <Link to="/about">about</Link>
-          </li>
-          <li>
-            <Link to="/accounts"> Accounts</Link>
-          </li>
-          <li>
-            <button
-              onClick={() =>
-                props.history.push(`/user/${props.currentUser.id}`)
-              }
-            >
-              Your Profile
-            </button>
-          </li>
-          <li>
-            <Link to="/profiles">profiles</Link>
-          </li>
-          <Link to="/questions">Questions</Link>
+        </li>
+        <li>
+          <Link to="/about">about</Link>
+        </li>
+        <li>
+          <Link to="/accounts"> Register</Link>
+        </li>
+        <li>
+          <Link to={`/user/${props.currentUser.id}`}>YourAccount</Link>
+        </li>
+        <li>
+          <Link to="/profiles">profiles</Link>
+        </li>
+        <Link to="/questions">Questions</Link>
+        <li>
           <Link to="/subscriptions">Subscribe</Link>
-        </nav>
-      </ul>
+        </li>
+      </nav>
     </div>
   );
 };

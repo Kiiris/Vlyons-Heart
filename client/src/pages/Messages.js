@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Messages = (props) => {
@@ -40,11 +41,12 @@ const Messages = (props) => {
           ? conversations?.map((element) => {
               return (
                 <div
+                  className="card"
                   key={element.id}
                   onClick={() => props.history.push(`/messages/${element.id}`)}
                 >
                   <h2>{element.title}</h2>
-                  <img src={element.photo_one} />
+                  <img className="matchimages" src={element.photo_one} />
                   <img src={element.photo_two} />
                   <button
                     onClick={async () => {
@@ -56,6 +58,7 @@ const Messages = (props) => {
                   >
                     Delete {element.title}
                   </button>
+                  <hr />
                 </div>
               );
             })

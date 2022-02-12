@@ -2,25 +2,10 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
@@ -80,4 +65,228 @@ img {
 
 .slideshowDot.active {
   background-color: #6a0dad;
+}
+
+.listings {
+  padding: 2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 30em);
+  justify-content: center;
+}
+.card {
+  color: white;
+  min-width: fit-content;
+  border-radius: 1em;
+  background-color: rgb(46, 13, 13);
+  padding: .1em;
+  margin: .5em;
+  border: .2rem solid rgba(0, 0, 0, 0.4);
+  box-shadow: .4rem .4rem .4rem .4rem rgb(29, 12, 7);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: rgb(187, 117, 129);
+  box-shadow: 0 .4rem .4rem .4rem  rgb(197, 197, 194);
+}
+
+.card img {
+  border-radius: 2rem 2rem 2rem 2rem;
+}
+
+.message_box{
+  background-color: rgba(245, 245, 245, 0.137);
+  padding: 0.5em;
+  margin: 0.8em;
+  max-width: 80vw;
+  border-top-left-radius: 2em 2em;
+  border-top-right-radius: 2em 2em;
+  border-bottom-left-radius: 2em 2em;
+  border-bottom-right-radius: 2em 2em;
+}
+/* nav {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: .8em;
+  text-align:end;
+  background: #5695c9;
+  border: solid .2em;
+  border-top-right-radius: 2em 2em ;
+  border-bottom-left-radius: 2em 2em;
+  border-bottom-right-radius: 2em 2em;
+  border-top-left-radius: 2em 2em;
+  list-style-type: none;
+  margin-right: 0.5em;
+  padding: 0.25em 1em;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+li {
+  float: right;
+  margin: auto;
+  text-align: center;
+  justify-content: space-around;
+} */
+
+.nav {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+ 
+}
+
+.nav li {
+  float: left;
+  color: rgb(0, 0, 0);
+  border-top-left-radius: 2em 2em;
+  border-top-right-radius: 2em 2em;
+  border-bottom-left-radius: 2em 2em;
+  border-bottom-right-radius: 2em 2em;
+  transition: all 0.5s;
+}
+
+.nav li:hover {
+  background-color: yellow;
+  opacity: 6;
+  box-shadow: 0 0 0.4rem 0.4rem white;
+}
+
+.matchimages{
+  max-width: 30vw;
+  margin: 1em;
+}
+
+.confirm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10rem;
+    box-sizing: border-box;
+    animation-name: confirm---open;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm__window {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    font-size: 1.2em;
+    font-weight: 900;
+    font-family: 'Noto Sans', sans-serif;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    opacity: 0;
+    transform: scale(0.75);
+    animation-name: confirm__window---open;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.2s;
+}
+
+.confirm__titlebar,
+.confirm__content,
+.confirm__buttons {
+    padding: .4em;
+    font-size: larger;
+    font-family: bolder;
+}
+
+.confirm__titlebar {
+    background: #222222;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.confirm__title {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.confirm__close {
+    background: none;
+    outline: none;
+    border: none;
+    transform: scale(2.5);
+    color: #ffffff;
+    transition: color .2s;
+}
+
+.confirm__close:hover {
+    color: #ff0000;
+    cursor: pointer;
+}
+
+.confirm__content {
+    line-height: 2.8em;
+}
+
+.confirm__buttons {
+    background: #eeeeee;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.confirm__button {
+    padding: 0.4em 0.8em;
+    border: 2px solid #009879;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #009879;
+    font-weight: bold;
+    font-size: 1.1em;
+    font-family: 'Noto Sans', sans-serif;
+    margin-left: 0.6em;
+    cursor: pointer;
+    outline: none;
+}
+
+.confirm__button--fill {
+    background: #009879;
+    color: #ffffff;
+}
+
+.confirm-bg {
+  position: fixed;
+  display: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #202020;
+  opacity: 0.55;
+  overflow: hidden; /* disable scrolling*/
+  z-index: 2; /* higher than all other items, but lower than 
+    the confirm box*/
+}
+
+.each-slide > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 350px;
+}
+
+.each-slide span {
+  padding: 20px;
+  font-size: 20px;
+  background: #efefef;
+  text-align: center;
 }

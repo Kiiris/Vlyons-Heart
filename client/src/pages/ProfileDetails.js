@@ -6,13 +6,14 @@ const ProfileDetails = (props) => {
   const [content, setContent] = useState('');
   const [matched, setMatched] = useState(false);
   const [myProfile, setProfile] = useState(false);
+  const [edited, setEdited] = useState(false);
+  const [confirm, setConfirmed] = useState(false);
 
   const getDetails = async () => {
     const res = await axios.get(
       `http://localhost:8000/user/${props.match.params.id}`
     );
     setDetails(res.data);
-    console.log(res.data.liked_by);
     if (res.data.id === props.currentUser.id) {
       setProfile(true);
     }
@@ -21,7 +22,10 @@ const ProfileDetails = (props) => {
     const yourliking = [...props.currentUser.likes];
     const finalliking = [...props.currentUser.liked_by];
 
-    console.log(res.data.likes);
+    console.log(likedby);
+    console.log(theirbody);
+    console.log(yourliking);
+    console.log(finalliking);
     if (
       (yourliking.includes(details.username) === true) &
       (finalliking.includes(details.username) === true) &
@@ -31,28 +35,9 @@ const ProfileDetails = (props) => {
       setMatched(true);
     }
   };
-  const likeHuman = async () => {
-    const ablebody = [...details.liked_by, props.currentUser.username];
-    await axios.put(`http://localhost:8000/user/${props.match.params.id}`, {
-      email: details.email,
-      username: details.username,
-      password: details.password,
-      gender: details.gender,
-      preference: details.preference,
-      birth_year: details.birth_year,
-      location: details.location,
-      description: details.description,
-      photo_url: details.photo_url,
-      likes: details.likes,
-      liked_by: ablebody
-    });
-    alert(
-      `you added ${props.currentUser.username} to ${details.username}'s list of liked_by's`
-    );
-  };
-
-  const updateLike = async () => {
+  const updateLikes = async () => {
     const addLike = [...props.currentUser.likes, details.username];
+    const ablebody = [...details.liked_by, props.currentUser.username];
     await axios.put(`http://localhost:8000/user/${props.currentUser.id}`, {
       email: props.currentUser.email,
       username: props.currentUser.username,
@@ -68,6 +53,22 @@ const ProfileDetails = (props) => {
     });
     alert(
       `you added ${details.username} to ${props.currentUser.username}'s list of likes`
+    );
+    await axios.put(`http://localhost:8000/user/${props.match.params.id}`, {
+      email: details.email,
+      username: details.username,
+      password: details.password,
+      gender: details.gender,
+      preference: details.preference,
+      birth_year: details.birth_year,
+      location: details.location,
+      description: details.description,
+      photo_url: details.photo_url,
+      likes: details.likes,
+      liked_by: ablebody
+    });
+    alert(
+      `you added ${props.currentUser.username} to ${details.username}'s list of liked_by's`
     );
   };
 
@@ -98,8 +99,7 @@ const ProfileDetails = (props) => {
       (likedby.includes(props.currentUser.username) !== true) &
       (yourliking.includes(details.username) !== true)
     ) {
-      likeHuman();
-      updateLike();
+      updateLikes();
     }
   };
 
@@ -109,13 +109,26 @@ const ProfileDetails = (props) => {
   const deleteProfile = async (e) => {
     e.preventDefault();
     await axios.delete(`http://localhost:8000/user/${props.match.params.id}`);
-    window.location.reload();
     alert('profile deleted');
   };
   useEffect(() => {
     getDetails();
   }, []);
 
+  const editProfile = (e) => {
+    //EDIT this later hehe
+    setEdited(true);
+  };
+
+  const unconfirm = (e) => {
+    e.preventDefault();
+    setConfirmed(false);
+  };
+
+  const confirmButton = (e) => {
+    e.preventDefault();
+    setConfirmed(true);
+  };
   return (
     <div>
       {myProfile ? (
@@ -126,8 +139,10 @@ const ProfileDetails = (props) => {
       <h1> self summary:</h1> <p>{details.selfsummary}</p>
       <p>{details.description}</p>
       {myProfile ? (
+        <button onClick={editProfile}>Edit your Profile?</button>
+      ) : null}
+      {edited ? (
         <section>
-          <button onClick={deleteProfile}> Delete Profile</button>
           <h4>Change your fields here</h4>
           <input
             id="email"
@@ -190,8 +205,9 @@ const ProfileDetails = (props) => {
               value={content.photo_url}
               placeholder={details.photo_url}
               onChange={handleChange}
-            />{' '}
+            />
           </form>
+          <button onClick={confirmButton}> Delete Profile</button>
         </section>
       ) : null}
       {!myProfile ? (
@@ -200,6 +216,21 @@ const ProfileDetails = (props) => {
         </button>
       ) : null}
       <br />
+      {confirm ? (
+        <section>
+          <button
+            className="confirm-bg"
+            onClick={() => {
+              const confirmBox = window.confirm(
+                'Do you really want to delete this Crumb?'
+              );
+              if (confirmBox === true) {
+                deleteProfile();
+              }
+            }}
+          ></button>
+        </section>
+      ) : null}
     </div>
   );
 };

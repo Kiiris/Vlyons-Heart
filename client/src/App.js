@@ -95,7 +95,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {!started ? null : <NavBar />}
+        {!started ? null : <NavBar currentUser={currentUser} />}
         {!started ? <button onClick={startUp}>Let's start!</button> : null}
         {started ? (
           <div>
