@@ -95,7 +95,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {!started ? <button onClick={startUp}>Let's start!</button> : null}
+        {!started ? (
+          <button className="startup" onClick={startUp}>
+            Let's start!
+          </button>
+        ) : null}
         {started ? (
           <>
             {logged ? <NavBar currentUser={currentUser} /> : null}

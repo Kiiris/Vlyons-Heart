@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django_filters.rest_framework import DjangoFilterBackend
-
+from rest_framework import filters
 from rest_framework import generics
 from .serializers import UserSerializer, ConversationSerializer, MessageSerializer
 from .models import Message, Conversation, User
@@ -10,6 +10,8 @@ from .models import Message, Conversation, User
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    filter_backends = [filters.OrderingFilter]
+    filterset_fields = ['__all__']
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()

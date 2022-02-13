@@ -5,11 +5,13 @@ import axios from 'axios';
 const Messages = (props) => {
   const [conversations, setConversations] = useState();
   const [messages, setMessages] = useState();
+  const [numbers, setNumbers] = useState(0);
   const getConversations = async () => {
     const res = await axios.get(
       `http://localhost:8000/conversation/?user=${props.currentUser.id}`
     );
     setConversations(res.data);
+    setNumbers(res.data.length);
     console.log(res.data);
   };
   const getMessages = async () => {
@@ -25,7 +27,7 @@ const Messages = (props) => {
     <div>
       <div>
         <br />
-        {/* <h1>You have {Object.keys(conversations).length} matches</h1> */}
+        <h1>You have {numbers} matches</h1>
       </div>
       <div>
         {props.logged
