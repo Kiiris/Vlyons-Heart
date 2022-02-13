@@ -135,7 +135,7 @@ const ProfileDetails = (props) => {
         <h1>This is your profile, {props.currentUser.username}</h1>
       ) : null}
       {matched ? <h1>You matched! </h1> : null}
-      <img src={details.photo_url} />
+      <img src={details.photo_url} className="profilephoto" height="250" />
       <h1> self summary:</h1> <p>{details.selfsummary}</p>
       <p>{details.description}</p>
       {myProfile ? (

@@ -25,7 +25,7 @@ const Messages = (props) => {
     <div>
       <div>
         <br />
-        <h1>You have {conversations.length} matches</h1>
+        {/* <h1>You have {Object.keys(conversations).length} matches</h1> */}
       </div>
       <div>
         {props.logged
