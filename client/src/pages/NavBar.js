@@ -54,7 +54,13 @@ const NavBar = (props) => {
                 <Link to="/about">about</Link>
               </li>
               <li>
-                <Link to="/accounts"> Register</Link>
+                <Link to="/accounts">
+                  {' '}
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/3456/3456426.png"
+                    height="40"
+                  />
+                </Link>
               </li>
               <li>
                 <Link to="/profiles">
@@ -65,7 +71,12 @@ const NavBar = (props) => {
                 </Link>
               </li>
               <li>
-                <Link to="/questions">Questions</Link>
+                <Link to="/questions">
+                  <img
+                    src="https://www.pinclipart.com/picdir/middle/104-1048025_frequently-asked-questions-question-icon-png-transparent-clipart.png"
+                    height="40"
+                  />
+                </Link>
               </li>
               <li>
                 <Link to="/subscriptions">Subscribe</Link>

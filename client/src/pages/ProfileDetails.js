@@ -3,11 +3,11 @@ import axios from 'axios';
 
 const ProfileDetails = (props) => {
   const [details, setDetails] = useState([]);
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState(props.currentUser);
   const [matched, setMatched] = useState(false);
   const [myProfile, setProfile] = useState(false);
   const [edited, setEdited] = useState(false);
-  const [confirm, setConfirmed] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const getDetails = async () => {
     const res = await axios.get(
@@ -75,7 +75,7 @@ const ProfileDetails = (props) => {
   console.log(...props.currentUser.likes, details.username);
   console.log(props.currentUser);
   const handleChange = (e) => {
-    setContent(e.target.value);
+    setContent({ ...content, [e.target.id]: e.target.value });
   };
   const createConversation = async () => {
     const newConversaion = {
@@ -116,22 +116,44 @@ const ProfileDetails = (props) => {
   }, []);
 
   const editProfile = (e) => {
-    //EDIT this later hehe
-    setEdited(true);
+    setEdited(!edited);
   };
 
-  const unconfirm = (e) => {
+  const updateChange = async (e) => {
     e.preventDefault();
-    setConfirmed(false);
+    const res = await axios.put(
+      `http://localhost:8000/user/${props.match.params.id}`,
+      content
+    );
+    setContent(res.data);
+    alert('your profile has been changed');
   };
 
-  const confirmButton = (e) => {
-    e.preventDefault();
-    setConfirmed(true);
+  const Hide = async () => {
+    await axios.put(`http://localhost:8000/user/${props.currentUser.id}`, {
+      email: props.currentUser.email,
+      username: props.currentUser.username,
+      password: props.currentUser.password,
+      gender: props.currentUser.gender,
+      preference: props.currentUser.preference,
+      birth_year: props.currentUser.birth_year,
+      location: props.currentUser.location,
+      description: props.currentUser.description,
+      photo_url: props.currentUser.photo_url,
+      likes: props.currentUser.liked_by,
+      liked_by: props.currentUser.liked_by,
+      hidden: true,
+      romantic: props.currentUser.romantic,
+      musical: props.currentUser.musical,
+      nerdy: props.currentUser.nerdy
+    });
+    alert('your profile has been hidden!');
   };
   return (
     <div>
       <h2>{details.username}'s land</h2>
+      <br />
+      <br />
       {myProfile ? <h1>Yo! How's it going?</h1> : null}
       {matched ? <h1>You matched with {details.username}! </h1> : null}
       {details.album
@@ -161,98 +183,117 @@ const ProfileDetails = (props) => {
       </section>
       <hr />
       {myProfile ? (
-        <button onClick={editProfile}>Edit your Profile?</button>
-      ) : null}
-      {edited ? (
-        <section>
-          <h4>Change your fields here</h4>
-          <input
-            id="email"
-            type="text"
-            value={content.email}
-            placeholder={details.email}
-            onChange={handleChange}
-          />
-
-          <textarea
-            id="username"
-            placeholder={details.username}
-            value={content.username}
-            onChange={handleChange}
-          />
-          <input
-            id="gender"
-            type="text"
-            placeholder={details.gender}
-            value={content.gender}
-            onChange={handleChange}
-          />
-
-          <textarea
-            id="preference"
-            value={content.preference}
-            placeholder={details.preference}
-            onChange={handleChange}
-          />
-          <input
-            id="birth_year"
-            type="text"
-            placeholder={details.birth_year}
-            value={content.birth_year}
-            onChange={handleChange}
-          />
-
-          <textarea
-            id="location"
-            placeholder={details.location}
-            value={content.location}
-            onChange={handleChange}
-          />
-          <input
-            id="self_summary"
-            type="text"
-            value={content.self_summary}
-            placeholder={details.self_summary}
-            onChange={handleChange}
-          />
-          <form>
-            <textarea
-              id="description"
-              placeholder={details.description}
-              value={content.description}
-              onChange={handleChange}
-            />
-            <textarea
-              id="photo_url"
-              value={content.photo_url}
-              placeholder={details.photo_url}
-              onChange={handleChange}
-            />
-          </form>
-          <button onClick={confirmButton}> Delete Profile</button>
-        </section>
-      ) : null}
-      {!myProfile ? (
-        <button onClick={likeProfile} className="editbutton">
-          Like
+        <button className="edit" onClick={editProfile}>
+          {!edited ? 'Edit your Profile?' : 'Change your fields here'}
         </button>
       ) : null}
-      <br />
-      {confirm ? (
-        <section>
-          <button
-            className="confirm-bg"
-            onClick={() => {
-              const confirmBox = window.confirm(
-                'Do you really want to delete this Crumb?'
-              );
-              if (confirmBox === true) {
-                deleteProfile();
-              }
-            }}
-          ></button>
-        </section>
+      {edited ? (
+        <>
+          <section>
+            <form onSubmit={updateChange} className="form">
+              <input
+                id="email"
+                type="text"
+                value={content.email}
+                placeholder={details.email}
+                onChange={handleChange}
+              />
+
+              <input
+                id="username"
+                placeholder={details.username}
+                value={content.username}
+                onChange={handleChange}
+              />
+              <select
+                className="gender"
+                value={content.gender}
+                placeholder={details.gender}
+                name="gender"
+                id="gender"
+              >
+                <option value="M">I am a Man</option>
+                <option value="W">I am a Woman</option>
+                <option value="N">I am Nonbinary</option>
+              </select>
+
+              <select
+                className="gender"
+                value={content.preference}
+                placeholder={details.preference}
+                name="preference"
+                id="preference"
+              >
+                <option value="M">I Prefer Men</option>
+                <option value="W">I Prefer Women</option>
+                <option value="N">Both</option>
+              </select>
+
+              <input
+                className="birth_year"
+                id="birth_year"
+                type="text"
+                placeholder={details.birth_year}
+                value={content.birth_year}
+                onChange={handleChange}
+              />
+
+              <input
+                id="location"
+                placeholder={details.location}
+                value={content.location}
+                onChange={handleChange}
+              />
+              <textarea
+                className="self"
+                id="self_summary"
+                type="text"
+                value={content.self_summary}
+                placeholder={details.self_summary}
+                onChange={handleChange}
+              />
+
+              <textarea
+                className="description"
+                id="description"
+                placeholder={details.description}
+                value={content.description}
+                onChange={handleChange}
+              />
+              <textarea
+                className="photo"
+                id="photo_url"
+                value={content.photo_url}
+                placeholder={details.photo_url}
+                onChange={handleChange}
+              />
+              <button type="submit" className="submit">
+                Confirm?
+              </button>
+            </form>
+          </section>
+          <section>
+            <button className="DELETEbutton" onClick={Hide}>
+              Disable Profile
+            </button>
+            <button className="DELETEbutton" onClick={deleteProfile}>
+              DELETE Profile{' '}
+            </button>
+          </section>
+        </>
       ) : null}
+      {!myProfile ? (
+        <div>
+          <button onClick={likeProfile} className="likebutton">
+            Like
+          </button>
+          <br />
+          <button onClick={createConversation} className="edit">
+            Have a chat with them!
+          </button>
+        </div>
+      ) : null}
+      <br />
     </div>
   );
 };
