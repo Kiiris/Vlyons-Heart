@@ -8,6 +8,7 @@ import ProfileDetails from './pages/ProfileDetails';
 import Messages from './pages/Messages';
 import axios from 'axios';
 import './App.css';
+import Home from './pages/Home';
 import MessageDetails from './pages/MessageDetails';
 import YourAccount from './pages/YourAccount';
 
@@ -18,7 +19,6 @@ function App() {
   const [started, setStarted] = useState(false);
   const [myProfile, setProfile] = useState(false);
   const [user, seUser] = useState();
-  // const [preferences, setPreferences] = useState('Both');
 
   const getResults = async () => {
     const res = await axios.get(`http://localhost:8000/user`);
@@ -95,124 +95,130 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {!started ? null : <NavBar currentUser={currentUser} />}
         {!started ? <button onClick={startUp}>Let's start!</button> : null}
         {started ? (
-          <div>
-            <form className={logged ? 'gone' : 'valid'}>
-              <input
-                required
-                type="text"
-                onChange={inputHandler}
-                value={Login.email}
-                className="email"
-                placeholder="Email"
-              />
-              <input
-                required
-                type="text"
-                onChange={inputHandler}
-                value={Login.username}
-                className="username"
-                placeholder="Username"
-              />
-              <input
-                required
-                type="password"
-                onChange={inputHandler}
-                value={Login.password}
-                className="password"
-                placeholder="Password"
-              />
+          <>
+            {logged ? <NavBar currentUser={currentUser} /> : null}
+            <div>
+              <article className="introtext">
+                <h1 className={logged ? 'gone' : 'party'}>
+                  Welcome to the Party
+                </h1>
+              </article>
+              <form className={logged ? 'gone' : 'sign'}>
+                <input
+                  required
+                  type="text"
+                  onChange={inputHandler}
+                  value={Login.email}
+                  className="email"
+                  placeholder="Email"
+                />
+                <input
+                  required
+                  type="text"
+                  onChange={inputHandler}
+                  value={Login.username}
+                  className="username"
+                  placeholder="Username"
+                />
+                <input
+                  required
+                  type="password"
+                  onChange={inputHandler}
+                  value={Login.password}
+                  className="password"
+                  placeholder="Password"
+                />
 
-              <button
-                className="loginbutton"
-                onClick={loginButton}
-                type="submit"
+                <button
+                  className="loginbutton"
+                  onClick={loginButton}
+                  type="submit"
+                >
+                  Login
+                </button>
+              </form>
+              <form
+                className={logged ? 'gone' : 'valid'}
+                onSubmit={createAccount}
               >
-                Login
-              </button>
-            </form>
-            <form
-              className={logged ? 'gone' : 'valid'}
-              onSubmit={createAccount}
-            >
-              <div className="form">
-                <div className="formField">
-                  <h2>Let's Go!</h2>
-                  <input
-                    name="email"
-                    type="text"
-                    placeholder="email"
-                    className="formTextArea"
-                  />
-                </div>
+                <div className="form">
+                  <div className="formField">
+                    <h2>Let's Get Our Love On</h2>
+                    <input
+                      name="email"
+                      type="text"
+                      placeholder="email"
+                      className="formTextArea"
+                    />
+                  </div>
 
-                <div className="formField">
                   <input
                     name="username"
                     type="text"
                     placeholder="username"
                     className="formTextArea"
                   />
-                </div>
 
-                <div className="formField">
-                  <textarea
+                  <input
                     name="password"
                     type="text"
                     placeholder="password"
                     className="formTextAreawitness"
                   />
-                </div>
-                <div className="formField">
-                  <select name="gender">
-                    <option value="M">I am Man</option>
-                    <option value="W">I am Woman</option>
-                    <option value="N">Nonbinary</option>
-                  </select>
-                </div>
-                <select name="preference">
-                  <option value="M">Prefer Men</option>
-                  <option value="W">Prefer Women</option>
-                  <option value="N">Both</option>
-                </select>
+                  <div className="formField">
+                    <select className="gender" name="gender">
+                      <option value="M">I am Man</option>
+                      <option value="W">I am Woman</option>
+                      <option value="N">Nonbinary</option>
+                    </select>
+                    <select className="gender" name="preference">
+                      <option value="M">Prefer Men</option>
+                      <option value="W">Prefer Women</option>
+                      <option value="N">Both</option>
+                    </select>
+                  </div>
 
-                <textarea
-                  name="self_summary"
-                  type="text"
-                  className="self"
-                  placeholder="self_summary"
-                />
-                <textarea
-                  name="description"
-                  type="text"
-                  className="description"
-                  placeholder="description"
-                />
-                <textarea
-                  name="photo_url"
-                  type="text"
-                  className="photo"
-                  placeholder="photo"
-                />
-                <input
-                  name="location"
-                  type="text"
-                  className="location"
-                  placeholder="location"
-                />
-                <input
-                  name="birth_year"
-                  type="number"
-                  className="birth_year"
-                  placeholder="birth_year"
-                />
-              </div>
+                  <textarea
+                    name="self_summary"
+                    type="text"
+                    className="self"
+                    placeholder="self_summary"
+                  />
+                  <textarea
+                    name="description"
+                    type="text"
+                    className="description"
+                    placeholder="description"
+                  />
+                  <textarea
+                    name="photo_url"
+                    type="text"
+                    className="photo"
+                    placeholder="photo"
+                  />
+                  <br />
+                  <input
+                    name="location"
+                    type="text"
+                    className="location"
+                    placeholder="location"
+                  />
+                  <input
+                    name="birth_year"
+                    type="number"
+                    className="birth_year"
+                    placeholder="birth_year"
+                  />
+                </div>
 
-              <button type="submit">Submit</button>
-            </form>
-          </div>
+                <button className="submit" type="submit">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </>
         ) : null}
         <main>
           <Switch>
@@ -297,6 +303,21 @@ function App() {
                   women={women}
                   currentUser={currentUser}
                   logged={logged}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/"
+              component={(props) => (
+                <Home
+                  {...props}
+                  members={members}
+                  men={men}
+                  women={women}
+                  currentUser={currentUser}
+                  logged={logged}
+                  started={started}
                 />
               )}
             />

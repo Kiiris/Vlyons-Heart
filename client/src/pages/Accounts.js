@@ -49,9 +49,9 @@ const Accounts = (props) => {
   };
   return (
     <div>
-      <h1>This is the accounts page</h1>
-      {/* {logged ? <h1>Welcome to the party {currentUser.username}</h1> : null} */}
-      <form className={!logged ? 'valid' : 'loggedin'}>
+      <br />
+
+      <form className="sign">
         <input
           type="text"
           onChange={inputHandler}
@@ -73,34 +73,31 @@ const Accounts = (props) => {
           className="password"
           placeholder="Password"
         />
-
+        <br />
         <button className="loginbutton" onClick={loginButton} type="submit">
           Login
         </button>
       </form>
+
       <form onSubmit={createAccount}>
         <div className="form">
           <div className="formField">
-            <h2>Let's Go!</h2>
+            <h1>Let's Get Our Love On </h1>
             <input
               name="email"
               type="text"
               placeholder="email"
               className="formTextArea"
             />
-          </div>
 
-          <div className="formField">
             <input
               name="username"
               type="text"
               placeholder="username"
               className="formTextArea"
             />
-          </div>
 
-          <div className="formField">
-            <textarea
+            <input
               name="password"
               type="text"
               placeholder="password"
@@ -108,18 +105,18 @@ const Accounts = (props) => {
             />
           </div>
           <div className="formField">
-            <select name="gender">
+            <select className="gender" name="gender">
               <option value="M">I am Man</option>
               <option value="W">I am Woman</option>
               <option value="N">Nonbinary</option>
             </select>
-          </div>
-          <select name="preference">
-            <option value="M">Prefer Men</option>
-            <option value="W">Prefer Women</option>
-            <option value="N">Both</option>
-          </select>
 
+            <select className="gender" name="preference">
+              <option value="M">I Prefer Men</option>
+              <option value="W">I Prefer Women</option>
+              <option value="N">Both</option>
+            </select>
+          </div>
           <textarea
             name="self_summary"
             type="text"
@@ -138,6 +135,7 @@ const Accounts = (props) => {
             className="photo"
             placeholder="photo"
           />
+          <br />
           <input
             name="location"
             type="text"
@@ -152,7 +150,9 @@ const Accounts = (props) => {
           />
         </div>
 
-        <button type="submit">Submit</button>
+        <button className="submit" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

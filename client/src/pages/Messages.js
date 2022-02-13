@@ -21,20 +21,11 @@ const Messages = (props) => {
     getConversations();
   }, []);
 
-  // console.log(conversations[0].photo_one);
-  // const rightConversation = conversations.filter(
-  //   (element) => element.title === 'Jana & Jacob'
-  // );
-  // console.log(rightConversation);
-  // props.currentUser.conversations.forEach((element) => console.log(element));
-
-  // const matches = Object.entries(conversations);
-
   return (
     <div>
       <div>
-        {/* {' '}
-        <h1>You have {conversations.length} matches</h1>{' '} */}
+        <br />
+        <h1>You have {conversations.length} matches</h1>
       </div>
       <div>
         {props.logged
@@ -49,6 +40,7 @@ const Messages = (props) => {
                   <img className="matchimages" src={element.photo_one} />
                   <img src={element.photo_two} />
                   <button
+                    className="DELETEbutton"
                     onClick={async () => {
                       await axios.delete(
                         `http://localhost:8000/conversation/${element.id}`

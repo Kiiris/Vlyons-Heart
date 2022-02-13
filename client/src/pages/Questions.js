@@ -346,6 +346,7 @@ const Questions = (props) => {
         nerdy: props.currentUser.nerdy
       });
     }
+    changeText(randomItem);
   };
   return (
     <div className="slideshow">
@@ -354,7 +355,6 @@ const Questions = (props) => {
         <button
           className={clickDef ? 'definitely' : 'inactive'}
           onClick={() => {
-            changeText(randomItem);
             Check();
           }}
         >
@@ -364,7 +364,6 @@ const Questions = (props) => {
         <button
           className={clickSome ? 'somewhat' : 'inactive'}
           onClick={() => {
-            changeText(randomItem);
             CheckSome();
           }}
         >
@@ -374,7 +373,6 @@ const Questions = (props) => {
         <button
           className={clickMod ? 'moderately' : 'inactive'}
           onClick={() => {
-            changeText(randomItem);
             CheckMod();
           }}
         >
@@ -385,18 +383,20 @@ const Questions = (props) => {
         <button
           className={clickNot ? 'not' : 'inactive'}
           onClick={() => {
-            changeText(randomItem);
             CheckNot();
           }}
         >
           Not at all
         </button>
-        <button
-          className="nicebutton"
-          disabled={!clickDef & clickMod & clickNot & clickSome}
-          onClick={handleSubmit}
-        ></button>
       </section>
+      <br />
+      <button
+        className="nicebutton"
+        disabled={!clickDef & clickMod & clickNot & clickSome}
+        onClick={handleSubmit}
+      >
+        The button of champions
+      </button>
     </div>
   );
 };
