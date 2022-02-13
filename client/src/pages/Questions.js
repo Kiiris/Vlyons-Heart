@@ -1,21 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Slide } from 'react-slideshow-image';
+import React, { useEffect, useState, useRef } from 'react';
 
-const slideImages = [
-  'images/slide_2.jpg',
-  'images/slide_3.jpg',
-  'images/slide_4.jpg'
-];
 const Questions = (props) => {
   const colors = ['#0088FE', '#00C49F', '#FFBB28'];
-
   const [index, setIndex] = useState(0);
   const [questions, setQuestions] = useState([
-    {
-      romance_one: "Is long distance something that you're comfortable with?",
-      romance_two: 'How romantic do you think you are?',
-      romance_three: 'Life is good?'
-    },
     {
       athletic: 'Are your physical attributes more important than mental?',
       athletic_two: 'Is working out a part of your normal routine?'
@@ -28,48 +16,84 @@ const Questions = (props) => {
     }
   ]);
 
-  let slideIndex = 0;
+  const romance = [
+    "Is long distance something that you're comfortable with?",
+    'How romantic do you think you are?',
+    'Life is good?'
+  ];
+  const [text, setText] = useState(
+    romance[Math.floor(Math.random() * romance.length)]
+  );
+  let randomItem = romance[Math.floor(Math.random() * romance.length)];
+  const changeText = (text) => {
+    setText(text);
+  };
   const nerdy = {
     'How important are games to you?': 2,
     "Is coding something you're very particular about?": 2
   };
   const another = ['pickles', 'sheep', 'pie'];
-  useEffect(() => {
-    // setIndex((prevIndex) =>
-    //   prevIndex === colors.length - 1 ? 0 : prevIndex + 1
-    // );
-    // return () => {};
-  }, []);
-
+  const Check = (e) => {
+    if (def.current.id == 'definitely') {
+      console.log('success');
+    } else if (mod.current.id == 'moderately') {
+      console.log('moderate success');
+    } else if (some.current.id == 'somewhat') {
+      console.log('some success');
+    }
+  };
+  const def = useRef('definitely');
+  const mod = useRef('moderately');
+  const some = useRef('somewhat');
+  console.log(mod.current.id);
+  console.log(def.current.id);
+  console.log(some.current.id);
   return (
     <div className="slideshow">
-      <div
-        className="slideshowSlider"
-        style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
-      >
-        {questions.map((element, index) => (
-          <div className="slide" key={index} style={{ color: 'orange' }}>
-            <h1>{element.romance_one}</h1>
-            <section>
-              <hr />
-              <h3>{element.definitely}</h3>
-              <h3>{element.moderately}</h3>
-            </section>
-          </div>
-        ))}
-      </div>
-
-      <div className="slideshowDots">
-        {another.map((_, idx) => (
-          <div
-            key={idx}
-            className={`slideshowDot${index === idx ? ' active' : ''}`}
-            onClick={() => {
-              setIndex(idx);
-            }}
-          ></div>
-        ))}
-      </div>
+      <section>
+        <h1>{text}</h1>
+        <button
+          ref={def}
+          id="definitely"
+          onClick={() => {
+            changeText(randomItem);
+            Check();
+          }}
+        >
+          Definitely
+        </button>
+        <hr />
+        <button
+          id="somewhat"
+          ref={some}
+          onClick={() => {
+            changeText(randomItem);
+            Check();
+          }}
+        >
+          Somewhat
+        </button>
+        <hr />
+        <button
+          ref={mod}
+          id="moderately"
+          // ref={myRef}
+          onClick={() => {
+            changeText(randomItem);
+            Check();
+          }}
+        >
+          Moderately
+        </button>
+        <hr />
+        <button
+          onClick={() => {
+            changeText(randomItem);
+          }}
+        >
+          Not at all
+        </button>
+      </section>
     </div>
   );
 };
