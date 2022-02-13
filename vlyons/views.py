@@ -14,6 +14,8 @@ class UserList(generics.ListCreateAPIView):
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['conversations']
 
 class ConversationList(generics.ListCreateAPIView):
     queryset = Conversation.objects.all()

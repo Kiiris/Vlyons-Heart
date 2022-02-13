@@ -4,11 +4,11 @@ from .models import Message, Conversation,User
 
 
 class UserSerializer(serializers.ModelSerializer):
-  conversations = serializers.HyperlinkedRelatedField(
-    view_name='conversation_detail',
+  conversations = serializers.StringRelatedField(
     many=True,
     read_only=True
   )
+  
   class Meta:
     model = User
     fields = ('id', 'email', 'conversations', 'username', 'gender', 'preference', 'birth_year', 'location', 'self_summary', 'description', 'photo_url', 'hidden', 'liked_by','likes', 'nerdy', 'musical', 'hard_working', 'romantic', 'album', 'password',)
@@ -37,7 +37,7 @@ class ConversationSerializer(serializers.HyperlinkedModelSerializer):
   conversation_url = serializers.ModelSerializer.serializer_url_field(
     view_name='conversation_detail'
     )
-  messages = serializers.PrimaryKeyRelatedField(
+  messages = serializers.StringRelatedField(
     #queryset=User.objects.all()
     read_only=True,
     many=True)
