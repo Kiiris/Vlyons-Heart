@@ -41,85 +41,36 @@ const Questions = (props) => {
     // return () => {};
   }, []);
 
-  showSlides(slideIndex);
-
-  // Next/previous controls
-  const plusSlides = (n) => {
-    showSlides((slideIndex += n));
-  };
-
-  function showSlides(n) {
-    let slides = document.querySelectorAll('.mySlides');
-    if (n > slides.length) {
-      slideIndex = 1;
-    }
-    if (n < 1) {
-      slideIndex = slides.length;
-    }
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style = { display: 'none' };
-    }
-    slides[slideIndex - 1].style = { display: 'block' };
-  }
-
-  const currentSlide = (n) => {
-    showSlides((slideIndex = n));
-  };
   return (
-    <div>
-      <Slide easing="ease">
-        <div className="each-slide">
-          <div style={{ backgroundImage: `url(${slideImages[0]})` }}>
-            <span>Slide 1</span>
+    <div className="slideshow">
+      <div
+        className="slideshowSlider"
+        style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
+      >
+        {questions.map((element, index) => (
+          <div className="slide" key={index} style={{ color: 'orange' }}>
+            <h1>{element.romance_one}</h1>
+            <section>
+              <hr />
+              <h3>{element.definitely}</h3>
+              <h3>{element.moderately}</h3>
+            </section>
           </div>
-        </div>
-        <div className="each-slide">
-          <div style={{ backgroundImage: `url(${slideImages[1]})` }}>
-            <span>Slide 2</span>
-          </div>
-        </div>
-        <div className="each-slide">
-          <div style={{ backgroundImage: `url(${slideImages[2]})` }}>
-            <span>Slide 3</span>
-          </div>
-        </div>
-      </Slide>
+        ))}
+      </div>
+
+      <div className="slideshowDots">
+        {another.map((_, idx) => (
+          <div
+            key={idx}
+            className={`slideshowDot${index === idx ? ' active' : ''}`}
+            onClick={() => {
+              setIndex(idx);
+            }}
+          ></div>
+        ))}
+      </div>
     </div>
   );
 };
 export default Questions;
-
-{
-  /* <div className="slideshow">
-<div
-  className="slideshowSlider"
-  style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
->
-  {colors.map((backgroundColor, index) => (
-    <div className="slide" key={index} style={{ backgroundColor }}>
-      <h1>Section</h1>
-      {questions.map((element) => (
-        <section>
-          <hr />
-          <h2>{element.romance_one}</h2>
-          <h3>{element.definitely}</h3>
-          <h3>{element.moderately}</h3>
-        </section>
-      ))}
-    </div>
-  ))}
-</div>
-
-<div className="slideshowDots">
-  {another.map((_, idx) => (
-    <div
-      key={idx}
-      className={`slideshowDot${index === idx ? ' active' : ''}`}
-      onClick={() => {
-        setIndex(idx);
-      }}
-    ></div>
-  ))}
-</div>
-</div> */
-}
