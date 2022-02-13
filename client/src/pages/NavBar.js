@@ -51,7 +51,12 @@ const NavBar = (props) => {
                 </Link>
               </li>
               <li>
-                <Link to="/about">about</Link>
+                <Link to="/about">
+                  <img
+                    src="https://www.clipartmax.com/png/middle/46-461952_for-companies-interested-in-selling-or-distributing-global-icon-transparent.png"
+                    height="40"
+                  />
+                </Link>
               </li>
               <li>
                 <Link to="/accounts">

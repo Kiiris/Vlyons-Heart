@@ -350,53 +350,63 @@ const Questions = (props) => {
   };
   return (
     <div className="slideshow">
-      <section>
-        <h1>{text}</h1>
-        <button
-          className={clickDef ? 'definitely' : 'inactive'}
-          onClick={() => {
-            Check();
-          }}
-        >
-          Definitely
-        </button>
-        <hr />
-        <button
-          className={clickSome ? 'somewhat' : 'inactive'}
-          onClick={() => {
-            CheckSome();
-          }}
-        >
-          Somewhat
-        </button>
-        <hr />
-        <button
-          className={clickMod ? 'moderately' : 'inactive'}
-          onClick={() => {
-            CheckMod();
-          }}
-        >
-          Moderately
-        </button>
-
-        <hr />
-        <button
-          className={clickNot ? 'not' : 'inactive'}
-          onClick={() => {
-            CheckNot();
-          }}
-        >
-          Not at all
-        </button>
-      </section>
-      <br />
-      <button
-        className="nicebutton"
-        disabled={!clickDef & clickMod & clickNot & clickSome}
-        onClick={handleSubmit}
-      >
-        The button of champions
-      </button>
+      {props.logged ? (
+        <>
+          <section className="questions">
+            <h1>{text}</h1>
+            <div
+              className={clickDef ? 'definitely' : 'inactive'}
+              id="definitely"
+            >
+              <button
+                className="submit"
+                onClick={() => {
+                  Check();
+                }}
+              >
+                Definitely
+              </button>
+            </div>
+            <div className={clickSome ? 'somewhat' : 'inactive'}>
+              <button
+                className="submit"
+                onClick={() => {
+                  CheckSome();
+                }}
+              >
+                Somewhat
+              </button>
+            </div>
+            <div className={clickMod ? 'moderately' : 'inactive'}>
+              <button
+                className="submit"
+                onClick={() => {
+                  CheckMod();
+                }}
+              >
+                Moderately
+              </button>
+            </div>
+            <div className={clickNot ? 'not' : 'inactive'}>
+              <button
+                className="submit"
+                onClick={() => {
+                  CheckNot();
+                }}
+              >
+                Not at all
+              </button>
+            </div>
+            <button
+              className="nicebutton"
+              disabled={!clickDef & !clickMod & !clickNot & !clickSome}
+              onClick={handleSubmit}
+            >
+              Next Question!
+            </button>
+          </section>
+        </>
+      ) : null}
     </div>
   );
 };

@@ -27,6 +27,7 @@ const Messages = (props) => {
     <div>
       <div>
         <br />
+        <br />
         <h1>You have {numbers} matches</h1>
       </div>
       <div>

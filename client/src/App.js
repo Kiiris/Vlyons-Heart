@@ -96,9 +96,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         {!started ? (
-          <button className="startup" onClick={startUp}>
-            Let's start!
-          </button>
+          <button className="startup" onClick={startUp}></button>
         ) : null}
         {started ? (
           <>
@@ -217,7 +215,7 @@ function App() {
                   />
                 </div>
 
-                <button className="submit" type="submit">
+                <button className="likebutton" type="submit">
                   Submit
                 </button>
               </form>

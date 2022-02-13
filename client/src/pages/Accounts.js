@@ -150,7 +150,7 @@ const Accounts = (props) => {
           />
         </div>
 
-        <button className="submit" type="submit">
+        <button className="likebutton" type="submit">
           Submit
         </button>
       </form>

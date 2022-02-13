@@ -76,6 +76,8 @@ const Profiles = (props) => {
   return (
     <div>
       <header>
+        <br />
+        <br />
         <h1> Welcome to the party, {props.currentUser.username}</h1>
 
         <h4>What you want is what you get</h4>
