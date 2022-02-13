@@ -131,13 +131,35 @@ const ProfileDetails = (props) => {
   };
   return (
     <div>
-      {myProfile ? (
-        <h1>This is your profile, {props.currentUser.username}</h1>
-      ) : null}
-      {matched ? <h1>You matched! </h1> : null}
-      <img src={details.photo_url} className="profilephoto" height="250" />
-      <h1> self summary:</h1> <p>{details.selfsummary}</p>
-      <p>{details.description}</p>
+      <h2>{details.username}'s land</h2>
+      {myProfile ? <h1>Yo! How's it going?</h1> : null}
+      {matched ? <h1>You matched with {details.username}! </h1> : null}
+      {details.album
+        ? details.album.map((element) => {
+            return (
+              <div>
+                <h2>Album Photos</h2>{' '}
+                <img src={element} height="250" width="300" />
+              </div>
+            );
+          })
+        : null}
+
+      <img
+        src={details.photo_url}
+        className="profilephoto"
+        height="250"
+        width="300"
+      />
+      <section>
+        <h2>Self Summary</h2>
+        {details.self_summary === '' ? (
+          <p>Looks like they're the strong silent type..</p>
+        ) : null}{' '}
+        <p>{details.selfsummary}</p>
+        <p>{details.description}</p>
+      </section>
+      <hr />
       {myProfile ? (
         <button onClick={editProfile}>Edit your Profile?</button>
       ) : null}
