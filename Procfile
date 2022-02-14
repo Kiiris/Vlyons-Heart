@@ -1,1 +1,1 @@
-web: gunicorn Vlyons-Heart.wsgi
+web: gunicorn vlyons_django.wsgi
