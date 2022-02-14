@@ -85,6 +85,9 @@ const ProfileDetails = (props) => {
       photo_two: props.currentUser.photo_url
     };
     await axios.post(`http://localhost:8000/conversation/`, newConversaion);
+    alert(
+      `New match! ${props.currentUser.username} & ${details.username} created. Check your messages!`
+    );
   };
   const likeProfile = (e) => {
     e.preventDefault();

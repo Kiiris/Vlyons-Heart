@@ -297,7 +297,7 @@ const Profiles = (props) => {
                             parseInt(element.nerdy) ? (
                           <div>
                             <img
-                              src="https://previews.123rf.com/images/kisslilly/kisslilly1503/kisslilly150300074/37842093-vector-musical-icons.jpg"
+                              src="https://www.clipartmax.com/png/middle/455-4555773_job-vector-opening-work-icon.png"
                               height="80"
                             />
                           </div>
