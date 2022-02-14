@@ -3,7 +3,6 @@ import axios from 'axios';
 
 const MessageDetails = (props) => {
   const [yourMessages, setMessages] = useState([]);
-  const [participants, setParticipants] = useState([]);
   const [newMessage, setMessage] = useState('');
   const [otherParty, setParty] = useState([]);
 
@@ -11,12 +10,9 @@ const MessageDetails = (props) => {
     const res = await axios.get(
       `http://localhost:8000/conversation/${props.match.params.id}`
     );
-    setParticipants(res.data);
     getMessages();
-    getOtherUser();
-    console.log(participants);
     console.log(res.data);
-    console.log(res.data.user);
+    getOtherUser(res.data);
   };
 
   const getPickups = async () => {
@@ -24,20 +20,17 @@ const MessageDetails = (props) => {
       `https://getpickuplines.herokuapp.com/lines/random`
     );
     setMessage(res.data);
-    console.log(res.data);
   };
-  const getOtherUser = async () => {
+  const getOtherUser = async (participants) => {
     const otherUser = participants.user.find(
       (element) => element !== props.currentUser.id
     );
-    console.log(otherUser);
+
     const res = await axios.get(`http://localhost:8000/user/${otherUser}`);
-    console.log(res.data);
 
     setParty(res.data);
   };
-  console.log(props.currentUser);
-  console.log('something ');
+
   const handleChange = (e) => {
     setMessage(e.target.value);
   };
@@ -47,30 +40,8 @@ const MessageDetails = (props) => {
       `http://localhost:8000/message/?conversation=${props.match.params.id}`
     );
     setMessages(res.data);
-    console.log(res.data);
   };
 
-  // const makeParticipants = async () => {
-  //   element = axios.get(
-  //     `http://localhost:8000/conversation/${props.match.params.id}`
-  //   );
-  //   setParticipants(element.data).then(
-  //     (otherUser = participants.user.find(
-  //       (element) => element !== props.currentUser.id,
-  //       (res = await axios.get(`http://localhost:8000/user/${otherUser}`)),
-  //       console.log(res.data),
-  //       setParty(res.data).then(
-  //         ((response = await axios.get(
-  //           `http://localhost:8000/message/?conversation=${props.match.params.id}`
-  //         )),
-  //         setMessages(response.data),
-  //         console.log(response.data))
-  //       )
-  //     ))
-  //   );
-  // };
-
-  // const found = yourMessages.find((element) => element.conversation);
   const postMessage = async (e) => {
     e.preventDefault();
     var currentUrl = window.location.href;
@@ -97,7 +68,7 @@ const MessageDetails = (props) => {
         height="200"
       />
       <img
-        onClick={() => props.history.push(`/user/${participants.id}`)}
+        onClick={() => props.history.push(`/user/${otherParty.id}`)}
         src={otherParty.photo_url}
         height="200"
       />
@@ -112,7 +83,7 @@ const MessageDetails = (props) => {
                     {element.sender === props.currentUser.id ? (
                       <h3>{props.currentUser.username}: </h3>
                     ) : (
-                      <h3>{participants.username}</h3>
+                      <h3>{otherParty.username}</h3>
                     )}
                     {element.content}
                   </article>
@@ -123,10 +94,10 @@ const MessageDetails = (props) => {
         : null}
       <form onSubmit={postMessage}>
         <textarea
+          className="messagebox"
           placeholder={newMessage.line}
           value={newMessage.content}
           onChange={handleChange}
-          size="50"
         />
         <br />
         <button>Make a message </button>

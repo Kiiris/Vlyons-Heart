@@ -64,4 +64,3 @@ const Messages = (props) => {
 };
 
 export default Messages;
-// user_id: `http://localhost:8000/user/${props.currentUser.id}`,
