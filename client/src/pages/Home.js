@@ -25,6 +25,7 @@ const Home = (props) => {
               Find Some Matches!
             </Link>
             <br />
+            <br />
             <Link to={`/user/${props.currentUser.id}`} className="homelinks">
               Head to Your Profile!
             </Link>

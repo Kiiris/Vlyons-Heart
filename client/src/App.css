@@ -66,12 +66,12 @@ img {
 .listings {
   padding: 2em;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 40em, 40em, 50em, 50em);
+  grid-template-columns: repeat(auto-fill, 5em, 5em, 5em, 5em);
   justify-content: center;
 }
 .card {
   color: white;
-  min-width: fit-content;
+  min-width: 50em;
   border-radius: 1em;
   background-color: rgb(46, 13, 13);
   padding: .8em;
@@ -389,20 +389,21 @@ transition:all .8s;
   touch-action: manipulation;
 }
 
-#geekbutton:hover {
+#geekbutton:hover,:active {
   background-color: #1e293b;
   color: #fff;
 }
 
-#romancebutton:hover{
+#romancebutton:hover,:active{
   background-color: #260e27;
   color: #fff;
 }
-#musicalbutton:hover{
+
+#musicalbutton:hover,:after{
   background-color: #b8bb0d;
   color: #fff;
 }
-#workingbutton:hover{
+#workingbutton:hover,:active{
   background-color: #4e300e;
   color: #fff;
 }
@@ -652,20 +653,44 @@ transition:all .8s;
   cursor: default;
   opacity: .24;
 }
+.entertext{
+  color:white;
+}
 .startup{
   position:absolute;
-  top: 15em;
+  top: 18em;
+  left: 70em;
   border-top: 8em solid transparent;
-  border-bottom: 8em solid transparent;
+  border-bottom:8em solid transparent;
+  border-top-left-radius: 3em 3em; 
+  border-top-right-radius: 7em 7em; 
+  border-bottom-left-radius: 1em 1em;
+  border-bottom-right-radius: 7em 7em;
   cursor: pointer;
-  border-left: 8em solid rgb(204, 106, 212);
-  background: none;
-  opacity: .4;
+  border-left: 8em solid rgb(170, 92, 92);
+  background-color: rgb(77, 8, 8);
   transition:all 4.2s;
+  animation: myfirst 5s linear 2s infinite alternate;  
+}
+/*15em; */
+ @keyframes myfirst {
+  0%   { left: 70em; padding-left: 1em; opacity: .5;}
+  25%  { left:60em; padding-right: 2em; opacity: .7;}
+  50%  { left:70em; padding-left: 1em; opacity: .9}
+  75%  {left: 60em; padding-left: 2em; opacity: .7;}
+  100% {left:70em; padding: 0; opacity: 1;}
+} 
+
+.heartlogo{
+  position: relative;
+  top: auto;
+width: 20em;
+  padding-bottom: 25em;
+
 }
 .startup:hover{
   opacity: 1;
-  width: 25%;
+box-shadow: 1rem 1rem 1rem 1rem rgb(29, 12, 7);
 }
 
 .entertext{
@@ -681,11 +706,11 @@ h1{
   color:black;
 }
 .detailscontainer{
-  position: relative;
+position: relative;
 left:30;
  display:flex;
  flex-direction: column;
- float: left;
+ float: center;
 }
 
 .newgrid{
@@ -693,7 +718,11 @@ left:30;
   grid-template-columns: repeat(auto-fill, 20em);
 } 
 .messageimage{
+  position: relative;
+  top: 10em;
   margin: .5em;
+  padding-bottom: 10em;
+  padding-top: 0em;
   max-width: 20em;
 }
 .messagedetailsimage{
@@ -706,7 +735,8 @@ left:30;
 }
 .homewelcome{
   font-size: 4em;
-
+color:white;
+text-decoration: underline;
 }
 
 .hometext{
@@ -729,6 +759,7 @@ float:right;
 .questiontext{
   font-size: 2.5em;
   font-family: 'Luckiest Guy',cursive;
+  color:white;
 }
 .sociallinks{
   display: flex;
@@ -754,7 +785,8 @@ float:right;
 }
 p{
   white-space: pre-line;
-  
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.5em;
 }
 .abouttext{
 font-family: 'Luckiest Guy', cursive;
@@ -768,3 +800,21 @@ padding: 0.5em;
 margin: 1.2rem;
 max-width: 30em;
 opacity: 0.7;}
+
+.homelinks{
+  border: 0.1em solid black;
+border-radius: .5em;
+color:white;
+font-weight: 900;
+text-decoration: none;
+font-size: 2em;
+transition:all .7s
+}
+.homelinks:hover{
+  background-color: yellow;
+  color:black;
+}
+h2
+{
+color: white;
+}

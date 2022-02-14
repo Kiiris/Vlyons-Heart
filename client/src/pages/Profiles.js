@@ -77,9 +77,11 @@ const Profiles = (props) => {
       <header>
         <br />
         <br />
-        <h1> Welcome to the party, {props.currentUser.username}</h1>
-
-        <h4>What you want is what you get</h4>
+        <h1 style={{ color: 'white' }}>
+          {' '}
+          Welcome to the party, {props.currentUser.username}
+        </h1>
+        <h2>~Find the Person for you~</h2>
         <button
           className="profilebuttons"
           id="romancebutton"

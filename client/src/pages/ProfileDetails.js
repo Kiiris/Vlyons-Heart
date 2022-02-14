@@ -67,9 +67,9 @@ const ProfileDetails = (props) => {
       likes: details.likes,
       liked_by: ablebody
     });
-    alert(
-      `you added ${props.currentUser.username} to ${details.username}'s list of liked_by's`
-    );
+    // alert(
+    //   `you added ${props.currentUser.username} to ${details.username}'s list of liked_by's`
+    // );
   };
 
   console.log(...props.currentUser.likes, details.username);
@@ -102,8 +102,6 @@ const ProfileDetails = (props) => {
       updateLikes();
     }
   };
-
-  console.log(props.currentUser);
   console.log(details);
 
   const deleteProfile = async (e) => {
@@ -149,6 +147,7 @@ const ProfileDetails = (props) => {
     });
     alert('your profile has been hidden!');
   };
+  console.log(props.currentUser.liked_by);
   return (
     <div>
       <h2>{details.username}'s land</h2>
@@ -158,11 +157,13 @@ const ProfileDetails = (props) => {
         <section>
           <h1 style={{ fontSize: '2em', color: 'white' }}>
             Yo! How's it going?
-          </h1>{' '}
-          <br />{' '}
-          <h1 style={{ fontSize: '2em', color: 'orange' }}>
-            You have {props.currentUser.likes.length} likes!
-          </h1>{' '}
+          </h1>
+          <br />
+          {props.currentUser.liked_by.length !== 0 ? (
+            <h1 style={{ fontSize: '2em', color: 'orange' }}>
+              You've liked {props.currentUser.likes.length} people
+            </h1>
+          ) : null}
         </section>
       ) : null}
       {matched ? <h1>You matched with {details.username}! </h1> : null}
@@ -187,8 +188,8 @@ const ProfileDetails = (props) => {
         <h2>Self Summary</h2>
         {details.self_summary === '' ? (
           <p>Looks like they're the strong silent type..</p>
-        ) : null}{' '}
-        <p>{details.selfsummary}</p>
+        ) : null}
+        <p>{details.self_summary}</p>
         <p>{details.description}</p>
       </section>
       <hr />
@@ -287,7 +288,7 @@ const ProfileDetails = (props) => {
               Disable Profile
             </button>
             <button className="DELETEbutton" onClick={deleteProfile}>
-              DELETE Profile{' '}
+              DELETE Profile
             </button>
           </section>
         </>

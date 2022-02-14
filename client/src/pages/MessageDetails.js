@@ -65,19 +65,22 @@ const MessageDetails = (props) => {
       <div className="detailscontainer">
         <section className="messagedetailsimage">
           <img
-            className="messageimages"
+            className="messageimage"
             onClick={() => props.history.push(`/user/${props.currentUser.id}`)}
             src={props.currentUser.photo_url}
             height="200"
+            width={200}
           />
           <img
             className="messageimage"
             onClick={() => props.history.push(`/user/${otherParty.id}`)}
             src={otherParty.photo_url}
             height="200"
+            width={200}
           />
         </section>
         <h1>Messages</h1>
+
         {props.logged
           ? yourMessages.map((element) => {
               return (
@@ -108,7 +111,7 @@ const MessageDetails = (props) => {
             onChange={handleChange}
           />
           <br />
-          <button className="postbutton">Make a message </button>
+          <button className="likebutton">Make a message </button>
         </form>
       </div>
     </div>

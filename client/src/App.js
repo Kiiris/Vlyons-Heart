@@ -97,9 +97,16 @@ function App() {
     <div className="App">
       <header className="App-header">
         {!started ? (
-          <button className="startup" onClick={startUp}>
-            <h1 className="entertext">Enter</h1>
-          </button>
+          <section>
+            <img
+              className="heartlogo"
+              src="https://i.imgur.com/FRNELWz.png"
+              height="180"
+            />
+            <button className="startup" onClick={startUp}>
+              <h1 className="entertext">Enter</h1>
+            </button>
+          </section>
         ) : null}
         {started ? (
           <>

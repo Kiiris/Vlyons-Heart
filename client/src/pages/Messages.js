@@ -28,7 +28,15 @@ const Messages = (props) => {
       <div>
         <br />
         <br />
-        <h1>You have {numbers} matches</h1>
+        <h1
+          style={{
+            color: 'orange',
+            textDecoration: 'underline',
+            fontSize: '3em'
+          }}
+        >
+          You have {numbers} matches
+        </h1>
       </div>
       <div>
         {props.logged
