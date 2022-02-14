@@ -667,3 +667,8 @@ transition:all .8s;
 height:10em;
 width:25em;
 }
+h1{
+  font-family: 'Lobster', cursive;
+  font-weight: 1000;
+  color:black;
+}
