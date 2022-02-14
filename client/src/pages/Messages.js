@@ -41,7 +41,7 @@ const Messages = (props) => {
                 >
                   <h2>{element.title}</h2>
                   <img className="matchimages" src={element.photo_one} />
-                  <img src={element.photo_two} />
+                  <img className="matchimages" src={element.photo_two} />
                   <button
                     className="DELETEbutton"
                     onClick={async () => {

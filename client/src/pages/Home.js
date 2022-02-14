@@ -32,11 +32,10 @@ const Home = (props) => {
             />
             <br />
             <p className="hometext">
-              On my Block is where you can receive all the info you need when
-              entering a new town. If you make an account you can post crime
-              tips, recommendations about your city, and even like and comment
-              on other's posts. There's a community of folks out there from all
-              over the country. We have safety tips out here well.
+              Hey there! Vlyons was founded on the principle of meeting new
+              people! Chat with strangers, find someone new, meet with the
+              people you'll have never met before! All that and more at
+              Vlyons-Heart!
             </p>
           </section>
           <h1> Let's Get To It!</h1>

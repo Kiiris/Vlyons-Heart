@@ -61,47 +61,55 @@ const MessageDetails = (props) => {
     getParticipants();
   }, []);
   return (
-    <div>
-      <img
-        onClick={() => props.history.push(`/user/${props.currentUser.id}`)}
-        src={props.currentUser.photo_url}
-        height="200"
-      />
-      <img
-        onClick={() => props.history.push(`/user/${otherParty.id}`)}
-        src={otherParty.photo_url}
-        height="200"
-      />
-      <button onClick={getPickups}>Need some inspiration?</button>
-      <h1>Messages</h1>
-      {props.logged
-        ? yourMessages.map((element) => {
-            return (
-              <div key={element.id}>
-                <section className="message_box">
-                  <article>
-                    {element.sender === props.currentUser.id ? (
-                      <h3>{props.currentUser.username}: </h3>
-                    ) : (
-                      <h3>{otherParty.username}</h3>
-                    )}
-                    {element.content}
-                  </article>
-                </section>
-              </div>
-            );
-          })
-        : null}
-      <form onSubmit={postMessage}>
-        <textarea
-          className="messagebox"
-          placeholder={newMessage.line}
-          value={newMessage.content}
-          onChange={handleChange}
-        />
-        <br />
-        <button>Make a message </button>
-      </form>
+    <div className="newgrid">
+      <div className="detailscontainer">
+        <section classNam="messagedetailsimage">
+          <img
+            className="messageimages"
+            onClick={() => props.history.push(`/user/${props.currentUser.id}`)}
+            src={props.currentUser.photo_url}
+            height="200"
+          />
+          <img
+            className="messageimage"
+            onClick={() => props.history.push(`/user/${otherParty.id}`)}
+            src={otherParty.photo_url}
+            height="200"
+          />
+        </section>
+        <h1>Messages</h1>
+        <button className="submit" onClick={getPickups}>
+          Need some inspiration?
+        </button>
+        {props.logged
+          ? yourMessages.map((element) => {
+              return (
+                <div key={element.id}>
+                  <section className="message_box">
+                    <article>
+                      {element.sender === props.currentUser.id ? (
+                        <h3>{props.currentUser.username}: </h3>
+                      ) : (
+                        <h3>{otherParty.username}</h3>
+                      )}
+                      {element.content}
+                    </article>
+                  </section>
+                </div>
+              );
+            })
+          : null}
+        <form onSubmit={postMessage}>
+          <textarea
+            className="messagebox"
+            placeholder={newMessage.line}
+            value={newMessage.content}
+            onChange={handleChange}
+          />
+          <br />
+          <button className="postbutton">Make a message </button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -672,3 +672,18 @@ h1{
   font-weight: 1000;
   color:black;
 }
+.detailscontainer{
+  position: relative;
+left:30;
+ display:flex;
+ flex-direction: column;
+ float: left;
+}
+
+.newgrid{
+  display: grid;
+} 
+.messageimage{
+  margin: 2em;
+  max-width: 20em;
+}

@@ -10,7 +10,7 @@ import axios from 'axios';
 import './App.css';
 import Home from './pages/Home';
 import MessageDetails from './pages/MessageDetails';
-import YourAccount from './pages/YourAccount';
+import About from './pages/About';
 
 function App() {
   const [men, setMen] = useState([]);
@@ -313,6 +313,21 @@ function App() {
               path="/"
               component={(props) => (
                 <Home
+                  {...props}
+                  members={members}
+                  men={men}
+                  women={women}
+                  currentUser={currentUser}
+                  logged={logged}
+                  started={started}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/about"
+              component={(props) => (
+                <About
                   {...props}
                   members={members}
                   men={men}
