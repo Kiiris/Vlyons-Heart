@@ -94,7 +94,7 @@ const ProfileDetails = (props) => {
       (yourliking.includes(details.username) === true) &
       (likedby.includes(props.currentUser.username) === true)
     ) {
-      console.log("you've already liked them!");
+      alert("you've already liked this person!");
     } else if (
       (likedby.includes(props.currentUser.username) !== true) &
       (yourliking.includes(details.username) !== true)
@@ -154,7 +154,17 @@ const ProfileDetails = (props) => {
       <h2>{details.username}'s land</h2>
       <br />
       <br />
-      {myProfile ? <h1>Yo! How's it going?</h1> : null}
+      {myProfile ? (
+        <section>
+          <h1 style={{ fontSize: '2em', color: 'white' }}>
+            Yo! How's it going?
+          </h1>{' '}
+          <br />{' '}
+          <h1 style={{ fontSize: '2em', color: 'orange' }}>
+            You have {props.currentUser.likes.length} likes!
+          </h1>{' '}
+        </section>
+      ) : null}
       {matched ? <h1>You matched with {details.username}! </h1> : null}
       {details.album
         ? details.album.map((element) => {

@@ -66,7 +66,7 @@ img {
 .listings {
   padding: 2em;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 30em);
+  grid-template-columns: repeat(auto-fill, 40em, 40em, 50em, 50em);
   justify-content: center;
 }
 .card {
@@ -654,14 +654,22 @@ transition:all .8s;
 }
 .startup{
   position:absolute;
-  top: 10em;
-  width: 0; 
-  height: 0; 
+  top: 15em;
   border-top: 8em solid transparent;
   border-bottom: 8em solid transparent;
   cursor: pointer;
-  border-left: 8em solid green;
+  border-left: 8em solid rgb(204, 106, 212);
   background: none;
+  opacity: .4;
+  transition:all 4.2s;
+}
+.startup:hover{
+  opacity: 1;
+  width: 25%;
+}
+
+.entertext{
+  font-size: 5em;
 }
 .messagebox{
 height:10em;
@@ -682,8 +690,81 @@ left:30;
 
 .newgrid{
   display: grid;
+  grid-template-columns: repeat(auto-fill, 20em);
 } 
 .messageimage{
-  margin: 2em;
+  margin: .5em;
   max-width: 20em;
 }
+.messagedetailsimage{
+  display: flex;
+  flex-direction:row-reverse
+}
+
+.homeicon{
+  margin: 1em;
+}
+.homewelcome{
+  font-size: 4em;
+
+}
+
+.hometext{
+font-family: 'Luckiest Guy', cursive;
+font-size: 3em;
+background-size: cover;
+color: black;
+border: 0.1em solid black;
+box-shadow: 1rem 1rem 1rem 1rem rgb(29, 12, 7);
+color: #ffffff;
+border-radius: 1em;
+padding: 0.5em;
+margin: 1.2rem;
+max-width: 20em;
+opacity: 0.7;
+float:right;
+
+}
+
+.questiontext{
+  font-size: 2.5em;
+  font-family: 'Luckiest Guy',cursive;
+}
+.sociallinks{
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  justify-content: flex-end;
+}
+
+.psections{
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.7em;
+
+  background: rgba(143, 98, 85, 0.2);
+  color: white;
+  border: .05em solid #8f9a9c;
+  box-shadow: .2rem .2rem .2rem .2rem rgb(41, 28, 24);
+  border-top-left-radius: 1em 1em; 
+  border-top-right-radius: 1em 1em; 
+  border-bottom-left-radius: 1em 1em;
+  border-bottom-right-radius: 1em 1em;
+  letter-spacing: .2em;
+
+}
+p{
+  white-space: pre-line;
+  
+}
+.abouttext{
+font-family: 'Luckiest Guy', cursive;
+font-size: 1.5em;
+background-size: cover;
+color: black;
+border: 0.1em solid black;
+box-shadow: 1rem 1rem 1rem 1rem rgb(29, 12, 7);
+border-radius: 1em;
+padding: 0.5em;
+margin: 1.2rem;
+max-width: 30em;
+opacity: 0.7;}

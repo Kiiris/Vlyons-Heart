@@ -63,7 +63,7 @@ const MessageDetails = (props) => {
   return (
     <div className="newgrid">
       <div className="detailscontainer">
-        <section classNam="messagedetailsimage">
+        <section className="messagedetailsimage">
           <img
             className="messageimages"
             onClick={() => props.history.push(`/user/${props.currentUser.id}`)}
@@ -78,9 +78,6 @@ const MessageDetails = (props) => {
           />
         </section>
         <h1>Messages</h1>
-        <button className="submit" onClick={getPickups}>
-          Need some inspiration?
-        </button>
         {props.logged
           ? yourMessages.map((element) => {
               return (
@@ -99,6 +96,10 @@ const MessageDetails = (props) => {
               );
             })
           : null}
+        <button className="submit" onClick={getPickups}>
+          Need some inspiration?
+        </button>
+        <br />
         <form onSubmit={postMessage}>
           <textarea
             className="messagebox"

@@ -11,6 +11,7 @@ import './App.css';
 import Home from './pages/Home';
 import MessageDetails from './pages/MessageDetails';
 import About from './pages/About';
+import Subscriptions from './pages/Subscriptions';
 
 function App() {
   const [men, setMen] = useState([]);
@@ -96,7 +97,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         {!started ? (
-          <button className="startup" onClick={startUp}></button>
+          <button className="startup" onClick={startUp}>
+            <h1 className="entertext">Enter</h1>
+          </button>
         ) : null}
         {started ? (
           <>
@@ -328,6 +331,21 @@ function App() {
               path="/about"
               component={(props) => (
                 <About
+                  {...props}
+                  members={members}
+                  men={men}
+                  women={women}
+                  currentUser={currentUser}
+                  logged={logged}
+                  started={started}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/subscriptions"
+              component={(props) => (
+                <Subscriptions
                   {...props}
                   members={members}
                   men={men}

@@ -9,13 +9,35 @@ const Questions = (props) => {
 
   const questions = {
     romantic: "Is long distance something that you're comfortable with?",
-    romantic: 'How romantic do you think you are?',
-    romantic: 'Life is good?',
+    romantic:
+      'Do you often clear your schedule to make time for people you love?',
+    romantic:
+      'Would you pickup an activity youve never tried because of your partner?',
     nerdy: 'How important are games to you?',
     nerdy: "Is coding something you're very particular about?",
     hardworking: 'Are your physical attributes more important than mental?',
     hardworking: 'Is working out a part of your normal routine?',
-    musical: 'Do you listen to a lot music during the day?'
+    musical: 'Do you listen to a lot music during the day?',
+    musical: 'Singing and/or karoke?',
+    nerdy: 'In your free time do you spend way too much time on the computer?',
+    hardworking: 'Is a college education for your partner important for you?',
+    musical:
+      'Was Django someone you were familiar with outside of the coding sphere?',
+    romantic:
+      'How likely would you be to gift someone flowers on the first date?',
+    nerdy: 'Do you get excited by new comic book adaptations?',
+    romantic:
+      'Is it really important that you show affection for those you talk to',
+    hardworking: 'Do you reguarly stick to your pre-planned schedule?',
+    musical: 'Are musicians attractive?',
+    nerdy: 'Is anime something that youre really into?',
+    romantic: 'Do you like watching romcoms with your partner?',
+    hardworking: 'Are you extremely motivated by the challenges youre facing?',
+    hardworking: 'Are solving challenges important for you to achieve?',
+    nerdy: 'Are you obssessed with stories or creative content?',
+    nerdy:
+      'Do you spend enough time on the computer that you need to wear glasses?',
+    musical: 'Do you like dancing by yourself or with a partner?'
   };
 
   const values = Object.values(questions);
@@ -353,7 +375,7 @@ const Questions = (props) => {
       {props.logged ? (
         <>
           <section className="questions">
-            <h1>{text}</h1>
+            <h1 className="questiontext"> {text}</h1>
             <div
               className={clickDef ? 'definitely' : 'inactive'}
               id="definitely"

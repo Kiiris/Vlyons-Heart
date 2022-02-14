@@ -84,7 +84,12 @@ const NavBar = (props) => {
                 </Link>
               </li>
               <li>
-                <Link to="/subscriptions">Subscribe</Link>
+                <Link to="/subscriptions">
+                  <img
+                    src="https://cdn3.iconfinder.com/data/icons/search-engine-optimization-27/48/landing_page-512.png"
+                    height="40"
+                  />
+                </Link>
               </li>
             </section>
           ) : null}

@@ -22,7 +22,6 @@ const Profiles = (props) => {
       console.log(res.data);
     }
   };
-
   const orderNerdy = async () => {
     const res = await axios.get(`http://localhost:8000/user/?ordering=-nerdy`);
     if (props.currentUser.preference === 'N') {
