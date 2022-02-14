@@ -19,13 +19,21 @@ const Subscriptions = (props) => {
                 The Developer's name is Calvin Menyfield
               </p>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                My goal with this capstone will be to utulize a complex set of
+                models to create a very engaging and delightful user experience.
+                I want to understand the relationships between message
+                interaction since it is so prevelant in today's world, so that I
+                can be better prepared for what's out there. My full CRUD will
+                give users the ability to create, update, find new users and
+                delete (or disable!) their own accounts in addition to creating,
+                deleting, and updating their own resume of people they add to
+                the conversations they make! Upon "liking" another user, that
+                will be stored in the database, and if there is a match, logic
+                will be setup that creates new conversations, and true
+                connections can take place. If I get all of those goals set up
+                in a reasonable time frame, I have even more ideas I want to
+                implement to make the website more customized, more accessible,
+                more responsive, and just more enjoyable to be involved in!
               </p>
             </article>
             <ul className="sociallinks">
