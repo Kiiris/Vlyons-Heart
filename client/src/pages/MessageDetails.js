@@ -19,6 +19,13 @@ const MessageDetails = (props) => {
     console.log(res.data.user);
   };
 
+  const getPickups = async () => {
+    const res = await axios.get(
+      `https://getpickuplines.herokuapp.com/lines/random`
+    );
+    setMessage(res.data);
+    console.log(res.data);
+  };
   const getOtherUser = async () => {
     const otherUser = participants.user.find(
       (element) => element !== props.currentUser.id
@@ -87,11 +94,14 @@ const MessageDetails = (props) => {
       <img
         onClick={() => props.history.push(`/user/${props.currentUser.id}`)}
         src={props.currentUser.photo_url}
+        height="200"
       />
       <img
         onClick={() => props.history.push(`/user/${participants.id}`)}
         src={otherParty.photo_url}
+        height="200"
       />
+      <button onClick={getPickups}>Need some inspiration?</button>
       <h1>Messages</h1>
       {props.logged
         ? yourMessages.map((element) => {
@@ -113,6 +123,7 @@ const MessageDetails = (props) => {
         : null}
       <form onSubmit={postMessage}>
         <textarea
+          placeholder={newMessage.line}
           value={newMessage.content}
           onChange={handleChange}
           size="50"
