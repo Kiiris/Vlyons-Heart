@@ -51,10 +51,33 @@ My goal with this capstone will be to utulize a complex set of models to create 
 ### **_Screenshots_**
 
 
-# ERD - (in progress)
-![Image](https://i.imgur.com/tLAvUl7.png)
+# Landing Page
+![Image](https://i.imgur.com/deN9Eah.png)
 ---
-# CHD - (in progress)
-![Image](https://i.imgur.com/GJMOEn2.png)
 
+# Home (upon Login)
+![Image](https://i.imgur.com/G7WSFAj.png)
 ---
+
+# Find The Right Person For You
+![Image](https://i.imgur.com/EPLlBOc.png)
+---
+
+# Improve Your Matches With Quiz Game
+![Image](https://i.imgur.com/hUCaDq3.png)
+---
+
+# Interact With All Compatible Matches
+![Image](https://i.imgur.com/Eb1dNI8.png)
+---
+
+# Message All Matches (With Some Inspiration :-) )
+![Image](https://i.imgur.com/N7k17Kt.png)
+---
+
+# Register and Sign In to Vlyon
+![Image](https://i.imgur.com/RQoUVVi.png)
+---
+
+# All of the and more...at Vlyons-Heart!
+

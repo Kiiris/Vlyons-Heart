@@ -21,7 +21,6 @@ const Accounts = (props) => {
         element.password === Login.password &&
         element.email === Login.email
     );
-    // user === undefined ? console.log('not a good user') :
     console.log(user);
     setCurrentUser(user);
     localStorage.setItem('loggedInUser', currentUser);

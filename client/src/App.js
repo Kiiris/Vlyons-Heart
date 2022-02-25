@@ -78,7 +78,8 @@ function App() {
       album: [e.target.photo_url.value]
     };
     await axios.post(`http://localhost:8000/user/`, newAccount);
-    // window.location.reload();
+    alert('account created successfully!');
+    window.location.reload();
   };
 
   useEffect(() => {
